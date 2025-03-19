@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронювання номера - Готель "Горизонт"</title>
+    <title>Бронювання</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,39 +21,74 @@
     </header>
 
     <main>
-        <h2>Заповніть форму для бронювання</h2>
+        <h2>Оформлення бронювання</h2>
         <form action="process_booking.php" method="POST">
-            <label for="room">Оберіть номер:</label>
-            <select id="room" name="room">
-                <option value="econom">Економ</option>
-                <option value="standard">Стандарт</option>
-                <option value="lux">Люкс</option>
-            </select>
+            <label for="room_id">Номер:</label>
+            <input type="text" id="room_id" name="room_id" value="" readonly>
 
-            <label for="check-in">Дата заїзду:</label>
-            <input type="date" id="check-in" name="check-in" required>
-
-            <label for="check-out">Дата виїзду:</label>
-            <input type="date" id="check-out" name="check-out" required>
+            <label for="price">Ціна за добу (₴):</label>
+            <input type="text" id="price" name="price" value="800" readonly>
 
             <label for="name">Ім'я:</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="surname">Прізвище:</label>
-            <input type="text" id="surname" name="surname" required>
-
-            <label for="phone">Телефон:</label>
-            <input type="tel" id="phone" name="phone" required>
-
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
+
+            <label for="check_in">Дата заїзду:</label>
+            <input type="date" id="check_in" name="check_in" required>
+
+            <label for="check_out">Дата виїзду:</label>
+            <input type="date" id="check_out" name="check_out" required>
+
+            <label for="services">Додаткові послуги:</label>
+            <div class="services-list">
+                <input type="checkbox" id="spa" name="services[]" value="300" onchange="updatePrice()"> 
+                <label for="spa">SPA-процедури (+300₴)</label>
+
+                <input type="checkbox" id="breakfast" name="services[]" value="150" onchange="updatePrice()"> 
+                <label for="breakfast">Сніданок у номер (+150₴)</label>
+
+                <input type="checkbox" id="pool" name="services[]" value="200" onchange="updatePrice()"> 
+                <label for="pool">Доступ до басейну (+200₴)</label>
+
+                <input type="checkbox" id="laundry" name="services[]" value="100" onchange="updatePrice()"> 
+                <label for="laundry">Пральня (+100₴)</label>
+            </div>
+
+            <label for="total_price">Загальна вартість (₴):</label>
+            <input type="text" id="total_price" name="total_price" value="800" readonly>
 
             <button type="submit">Підтвердити бронювання</button>
         </form>
     </main>
 
+    <script>
+        // Отримання room_id з URL
+        const params = new URLSearchParams(window.location.search);
+        const roomId = params.get("room_id");
+        if (roomId) {
+            document.getElementById("room_id").value = roomId;
+        }
+
+        // Початкова ціна номера
+        let basePrice = 800;
+
+        // Функція оновлення ціни
+        function updatePrice() {
+            let totalPrice = basePrice;
+            const checkboxes = document.querySelectorAll('input[name="services[]"]:checked');
+            
+            checkboxes.forEach((checkbox) => {
+                totalPrice += parseInt(checkbox.value);
+            });
+
+            document.getElementById("total_price").value = totalPrice;
+        }
+    </script>
+
     <footer>
-        <p>&copy; 2025 Готель "Горизонт". Всі права захищені.</p>
+        <p>&copy; 2025 Готель "Горизонт". Усі права захищено.</p>
     </footer>
 </body>
 </html>
