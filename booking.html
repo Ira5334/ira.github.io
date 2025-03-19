@@ -11,7 +11,7 @@
         <h1>Бронювання номера</h1>
         <nav>
             <ul>
-               <li><a href="index.html">Головна</a></li>
+                <li><a href="index.html">Головна</a></li>
                 <li><a href="rooms.html">Номери і ціни</a></li>
                 <li><a href="services.html">Послуги</a></li>
                 <li><a href="promotions.html">Акції та події</a></li>
@@ -41,21 +41,6 @@
             <label for="check_out">Дата виїзду:</label>
             <input type="date" id="check_out" name="check_out" required>
 
-            <label for="services">Додаткові послуги:</label>
-            <div class="services-list">
-                <input type="checkbox" id="spa" name="services[]" value="300" onchange="updatePrice()"> 
-                <label for="spa">SPA-процедури (+300₴)</label>
-
-                <input type="checkbox" id="breakfast" name="services[]" value="150" onchange="updatePrice()"> 
-                <label for="breakfast">Сніданок у номер (+150₴)</label>
-
-                <input type="checkbox" id="pool" name="services[]" value="200" onchange="updatePrice()"> 
-                <label for="pool">Доступ до басейну (+200₴)</label>
-
-                <input type="checkbox" id="laundry" name="services[]" value="100" onchange="updatePrice()"> 
-                <label for="laundry">Пральня (+100₴)</label>
-            </div>
-
             <label for="total_price">Загальна вартість (₴):</label>
             <input type="text" id="total_price" name="total_price" value="800" readonly>
 
@@ -74,17 +59,8 @@
         // Початкова ціна номера
         let basePrice = 800;
 
-        // Функція оновлення ціни
-        function updatePrice() {
-            let totalPrice = basePrice;
-            const checkboxes = document.querySelectorAll('input[name="services[]"]:checked');
-            
-            checkboxes.forEach((checkbox) => {
-                totalPrice += parseInt(checkbox.value);
-            });
-
-            document.getElementById("total_price").value = totalPrice;
-        }
+        // Оновлення загальної вартості
+        document.getElementById("total_price").value = basePrice;
     </script>
 
     <footer>
