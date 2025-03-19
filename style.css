@@ -22,6 +22,7 @@ header h1 {
 nav ul {
     list-style-type: none;
     padding: 0;
+    text-align: center;
 }
 
 nav ul li {
@@ -224,14 +225,63 @@ form button:hover {
     color: #99ff99;
 }
 
-.booking {
+/* Стилі для сторінки "Послуги" */
+#services-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.service-box {
     background-color: #444;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    box-sizing: border-box;
+}
+
+.service-box h3 {
+    color: #66cc66;
+    font-size: 1.8em;
+}
+
+.service-box p {
+    font-size: 1.1em;
+}
+
+.service-box strong {
+    color: #99ff99;
+}
+
+/* Форма бронювання */
+.booking-page {
+    background-color: #333;
+    padding: 40px;
+    border-radius: 8px;
     margin-top: 30px;
+}
+
+.booking-page h2 {
+    color: #66cc66;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.booking-page form {
+    background-color: #444;
+    padding: 20px;
     border-radius: 8px;
 }
 
-.booking input, .booking select {
+.booking-page form label {
+    color: #b3b3b3;
+    display: block;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+.booking-page form input, .booking-page form select {
     padding: 10px;
     width: 100%;
     background-color: #333;
@@ -241,7 +291,7 @@ form button:hover {
     border-radius: 5px;
 }
 
-.booking button {
+.booking-page form button {
     padding: 10px 20px;
     background-color: #66cc66;
     color: white;
@@ -251,7 +301,23 @@ form button:hover {
     margin-top: 20px;
 }
 
-.booking button:hover {
+.booking-page form button:hover {
+    background-color: #55b355;
+}
+
+/* Кнопка забронювати */
+.book-button {
+    display: inline-block;
+    background-color: #66cc66;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background 0.3s ease;
+}
+
+.book-button:hover {
     background-color: #55b355;
 }
 
@@ -263,7 +329,7 @@ footer p {
 
 /* Мобільна адаптація */
 @media (max-width: 768px) {
-    .service-card, .room, .promotion {
+    .service-card, .room, .promotion, .service-box, .booking-page form {
         width: 100%;
     }
 
@@ -275,9 +341,4 @@ footer p {
         display: block;
         margin-bottom: 10px;
     }
-}
-
-
-#login form button:hover {
-    background-color: #99ff99;
 }
