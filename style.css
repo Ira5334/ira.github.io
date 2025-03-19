@@ -1,190 +1,135 @@
-/* Загальні стилі для сторінки */
+/* Загальні стилі для всіх сторінок */
 body {
     font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #b3b3b3;
     margin: 0;
     padding: 0;
-    background-color: #1a1a1a;
-    color: #b3b3b3;
 }
 
 header {
-    background-color: #2e2e2e;
-    color: #66cc66;
+    background-color: #333;
     padding: 20px;
     text-align: center;
 }
 
 header h1 {
+    color: #66cc66;
     font-size: 2.5em;
     margin: 0;
 }
 
 nav ul {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
 }
 
 nav ul li {
     display: inline;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 nav ul li a {
-    color: #66cc66;
+    color: #b3b3b3;
     text-decoration: none;
     font-size: 1.2em;
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
-    color: #99ff99;
-}
-
-main {
-    padding: 20px;
-    background-color: #2a2a2a;
-}
-
-/* Головна сторінка */
-#hero {
-    background-color: #333;
     color: #66cc66;
-    padding: 50px 0;
-    text-align: center;
 }
 
-#hero h2 {
+footer {
+    background-color: #333;
+    color: #b3b3b3;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Основний контент сторінок */
+main {
+    padding: 40px;
+}
+
+h2 {
+    color: #66cc66;
     font-size: 2.5em;
     margin-bottom: 20px;
 }
 
-#hero p {
-    font-size: 1.2em;
-    line-height: 1.6;
-}
-
 section {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
-/* Номери та ціни */
-#rooms {
-    background-color: #333;
-    color: #b3b3b3;
-    border-radius: 8px;
-    padding: 30px;
-    margin-top: 30px;
-}
-
-#rooms h2 {
-    font-size: 2em;
-    color: #66cc66;
-}
-
-#rooms p {
-    font-size: 1.1em;
-    line-height: 1.6;
-}
-
-.room {
-    margin-top: 30px;
-    padding: 20px;
+/* Форматування для картки (для акцій, послуг, номерів) */
+.promotion, .room, .service {
     background-color: #444;
+    padding: 20px;
+    margin-bottom: 30px;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.room img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.room h3 {
-    font-size: 1.8em;
+.promotion h3, .room h3, .service h3 {
     color: #66cc66;
-    margin-top: 20px;
+    font-size: 1.8em;
+    margin-bottom: 15px;
 }
 
-.room p {
+.promotion p, .room p, .service p {
     font-size: 1.1em;
-    margin-top: 10px;
 }
 
-.room strong {
+.promotion strong, .room strong, .service strong {
     color: #99ff99;
 }
 
-/* Сторінка послуг */
-#services {
-    background-color: #333;
-    color: #b3b3b3;
-    padding: 30px;
-    border-radius: 8px;
-    margin-top: 30px;
-}
-
-#services h2 {
-    font-size: 2em;
-    color: #66cc66;
-}
-
-.service {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #444;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.service h3 {
-    font-size: 1.8em;
-    color: #66cc66;
-}
-
-.service p {
+button {
+    background-color: #66cc66;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 1.1em;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
-.service strong {
-    color: #99ff99;
+button:hover {
+    background-color: #55b355;
 }
 
-/* Контактна сторінка */
-#contact {
-    background-color: #333;
-    color: #b3b3b3;
-    padding: 30px;
-    border-radius: 8px;
-    margin-top: 30px;
-}
-
-#contact h2 {
-    font-size: 2em;
-    color: #66cc66;
-}
-
-#contact p {
-    font-size: 1.1em;
-    line-height: 1.6;
-}
-
+/* Стилі для форм */
 form {
-    margin-top: 20px;
     background-color: #444;
     padding: 20px;
     border-radius: 8px;
+    margin-top: 20px;
+}
+
+form label {
+    color: #b3b3b3;
+    display: block;
+    margin-top: 15px;
+    font-size: 1.1em;
 }
 
 form input, form textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 5px;
+    background-color: #333;
+    border: 1px solid #66cc66;
+    color: #b3b3b3;
     border-radius: 5px;
-    border: 1px solid #666;
-    background-color: #222;
-    color: #fff;
+    font-size: 1em;
+}
+
+form input[type="date"], form input[type="number"], form input[type="text"] {
+    font-size: 1.1em;
 }
 
 form button {
@@ -194,107 +139,144 @@ form button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 20px;
 }
 
 form button:hover {
-    background-color: #99ff99;
+    background-color: #55b355;
 }
 
-/* Футер */
-footer {
-    background-color: #2e2e2e;
-    color: #b3b3b3;
+/* Для картки послуг */
+#services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.service-card {
+    background-color: #444;
     padding: 20px;
-    text-align: center;
-    margin-top: 30px;
-}
-
-footer p {
-    font-size: 1em;
-}
-
-/* Сторінка для адміністратора */
-#admin-panel {
-    background-color: #2e2e2e;
-    color: #b3b3b3;
-    padding: 30px;
     border-radius: 8px;
-    margin-top: 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 30%;
+    box-sizing: border-box;
 }
 
-#admin-panel h2 {
-    font-size: 2em;
+.service-card h3 {
     color: #66cc66;
 }
 
-#admin-panel p {
+.service-card p {
     font-size: 1.1em;
-    line-height: 1.6;
 }
 
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.service-card strong {
+    color: #99ff99;
 }
 
-.admin-table th, .admin-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #666;
+/* Стилі для сторінки "Номери" */
+#rooms .room {
+    display: flex;
+    gap: 20px;
 }
 
-.admin-table th {
-    background-color: #444;
+.room img {
+    width: 30%;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.admin-table tr:nth-child(even) {
+.room .description {
+    width: 65%;
+}
+
+/* Стилі для сторінки "Акції" */
+#promotions {
     background-color: #333;
-}
-
-.admin-table tr:hover {
-    background-color: #2e2e2e;
-}
-
-/* Сторінка для логіна адміністратора */
-#login {
-    background-color: #333;
-    color: #b3b3b3;
     padding: 30px;
     border-radius: 8px;
     margin-top: 30px;
 }
 
-#login h2 {
-    font-size: 2em;
+#promotions h2 {
+    font-size: 2.5em;
     color: #66cc66;
 }
 
-#login form {
-    margin-top: 20px;
+.promotion {
     background-color: #444;
     padding: 20px;
     border-radius: 8px;
+    margin-top: 20px;
 }
 
-#login form input {
-    width: 100%;
+.promotion h3 {
+    font-size: 1.8em;
+    color: #66cc66;
+}
+
+.promotion p {
+    font-size: 1.1em;
+}
+
+.promotion strong {
+    color: #99ff99;
+}
+
+.booking {
+    background-color: #444;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+}
+
+.booking input, .booking select {
     padding: 10px;
-    margin-top: 10px;
+    width: 100%;
+    background-color: #333;
+    border: 1px solid #66cc66;
+    color: #b3b3b3;
+    font-size: 1.1em;
     border-radius: 5px;
-    border: 1px solid #666;
-    background-color: #222;
-    color: #fff;
 }
 
-#login form button {
+.booking button {
+    padding: 10px 20px;
     background-color: #66cc66;
     color: white;
-    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 20px;
 }
+
+.booking button:hover {
+    background-color: #55b355;
+}
+
+/* Футер */
+footer p {
+    font-size: 1em;
+    color: #b3b3b3;
+}
+
+/* Мобільна адаптація */
+@media (max-width: 768px) {
+    .service-card, .room, .promotion {
+        width: 100%;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
 
 #login form button:hover {
     background-color: #99ff99;
