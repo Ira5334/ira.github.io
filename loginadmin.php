@@ -3,8 +3,8 @@
 session_start();
 
 // Логін і пароль адміністратора
-$admin_username = 'admin';  // Заміни на свій логін
-$admin_password = 'password123';  // Заміни на свій пароль
+$admin_username = 'admin';  
+$admin_password = 'password123';  
 
 // Перевірка, чи були введені логін і пароль
 if (isset($_POST['username']) && isset($_POST['password'])) {
