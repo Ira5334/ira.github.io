@@ -9,7 +9,7 @@ body {
 
 /* Шапка сайту */
 header {
-    background-color: #66cc66;
+    background-color: #4CAF50; 
     padding: 20px;
     text-align: center;
 }
@@ -25,7 +25,7 @@ nav ul {
     list-style-type: none;
     padding: 0;
     text-align: center;
-    background-color: #4CAF50;
+    background-color: #388E3C; 
     margin-top: 20px;
 }
 
@@ -50,7 +50,7 @@ main {
     background-color: white;
 }
 
-/* Блоки на головній сторінці */
+
 .section-block {
     display: flex;
     justify-content: space-between;
@@ -72,7 +72,7 @@ main {
 }
 
 h2 {
-    color: #66cc66;
+    color: #4CAF50; 
     font-size: 2.5em;
     margin-bottom: 20px;
 }
@@ -92,7 +92,7 @@ p {
 }
 
 .service h3 {
-    color: #66cc66;
+    color: #4CAF50; 
     font-size: 1.8em;
     margin-bottom: 15px;
 }
@@ -102,7 +102,7 @@ p {
 }
 
 button {
-    background-color: #66cc66;
+    background-color: #4CAF50; 
     color: white;
     padding: 10px 20px;
     border: none;
@@ -113,7 +113,7 @@ button {
 }
 
 button:hover {
-    background-color: #55b355;
+    background-color: #388E3C; 
 }
 
 /* Форма бронювання */
@@ -125,7 +125,7 @@ button:hover {
 }
 
 .booking-page h2 {
-    color: #66cc66;
+    color: #4CAF50;
     font-size: 2.5em;
     margin-bottom: 20px;
 }
@@ -147,7 +147,7 @@ button:hover {
     padding: 10px;
     width: 100%;
     background-color: #f4f4f4;
-    border: 1px solid #66cc66;
+    border: 1px solid #4CAF50;
     color: #333;
     font-size: 1.1em;
     border-radius: 5px;
@@ -155,7 +155,7 @@ button:hover {
 
 .booking-page form button {
     padding: 10px 20px;
-    background-color: #66cc66;
+    background-color: #4CAF50; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -164,12 +164,12 @@ button:hover {
 }
 
 .booking-page form button:hover {
-    background-color: #55b355;
+    background-color: #388E3C; 
 }
 
 /* Кнопка "Забронювати" */
 .book-button {
-    background-color: #66cc66;
+    background-color: #4CAF50; /* Темніший зелений */
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -180,12 +180,49 @@ button:hover {
 }
 
 .book-button:hover {
-    background-color: #55b355;
+    background-color: #388E3C; 
     text-align: center;
 }
 
+/* Стилі для сторінки номери */
+.room {
+    display: flex;
+    justify-content: space-between;
+    background-color: #e6f9e6;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.room img {
+    width: 40%; 
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.room-info {
+    width: 55%;
+}
+
+.room-info h3 {
+    font-size: 2em;
+    color: #4CAF50; 
+}
+
+.room-info p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.room-info .book-button {
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+/* Футер */
 footer {
-    background-color: #66cc66;
+    background-color: #4CAF50; 
     color: white;
     text-align: center;
     padding: 20px;
