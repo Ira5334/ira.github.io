@@ -1,4 +1,4 @@
-/* Загальні стилі для всіх сторінок */
+/* Загальні стилі для всіх сторінок */ 
 body {
     font-family: 'Roboto', sans-serif; /* Сучасний шрифт */
     background-color: #fafafa; /* Світлий фон */
@@ -15,6 +15,7 @@ header {
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid #ddd; /* Легка лінія під шапкою */
+    border-radius: 8px 8px 0 0; /* Гострі кути згорнуті знизу */
 }
 
 header h1 {
@@ -75,6 +76,7 @@ main {
     border: 1px solid #ddd;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border-radius: 8px;
 }
 
 .section-block .block:hover {
@@ -145,15 +147,15 @@ p {
 /* Фотогалерея як колаж */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* Зменшення розміру фото і більше колонок */
     gap: 15px; /* Збільшено відстань між фото */
     margin-bottom: 40px;
 }
 
 .gallery img {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
+    height: 100%;
+    border-radius: 12px; /* Гострі кути */
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 3px solid transparent;
@@ -161,8 +163,8 @@ p {
 }
 
 .gallery img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: scale(1.1); /* Легке збільшення фото */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border: 3px solid #4CAF50;
 }
 
@@ -182,7 +184,7 @@ p {
 
 .modal img {
     width: 80%;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -196,6 +198,7 @@ footer {
     position: relative;
     bottom: 0;
     left: 0;
+    border-radius: 0 0 8px 8px; /* Гострі кути на футері */
 }
 
 footer p {
