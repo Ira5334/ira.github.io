@@ -43,11 +43,13 @@ nav ul li a {
     font-weight: 500;
     padding: 10px 20px;
     transition: all 0.3s;
+    border: 2px solid transparent;
 }
 
 nav ul li a:hover {
     background-color: #4CAF50;
     border-radius: 20px;
+    border-color: #4CAF50;
 }
 
 /* Основний контент сторінок */
@@ -69,6 +71,12 @@ main {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.section-block .block:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
 }
 
 .section-block .block img {
@@ -107,10 +115,12 @@ p {
 }
 
 .room img {
-    width: 60%;  
+    width: 40%; /* Зменшено розмір фото */
     border-radius: 8px;
     margin-bottom: 15px;
+    margin-right: 20px; /* Додано відступ між фото */
     transition: transform 0.3s ease;
+    display: inline-block; /* Розташування фото поруч */
 }
 
 .room img:hover {
@@ -130,12 +140,14 @@ p {
     text-decoration: none;
     border-radius: 5px;
     font-size: 1em;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease;
     display: inline-block;
+    border: 2px solid transparent;
 }
 
 .book-button:hover {
     background-color: #388E3C;
+    border-color: #388E3C;
 }
 
 /* Фотогалерея */
@@ -151,11 +163,13 @@ p {
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid transparent;
 }
 
 .gallery img:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 3px solid #4CAF50;
 }
 
 /* Модальне вікно для збільшених фото */
@@ -188,6 +202,7 @@ footer {
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 1000;
 }
 
 footer p {
@@ -208,10 +223,12 @@ footer .footer-buttons a {
     font-size: 1.1em;
     font-weight: 500;
     transition: background-color 0.3s ease;
+    border: 2px solid transparent;
 }
 
 footer .footer-buttons a:hover {
     background-color: #4CAF50;
+    border-color: #4CAF50;
 }
 
 /* Стилі для модальних вікон */
@@ -238,8 +255,9 @@ footer .footer-buttons a:hover {
     color: #388E3C;
 }
 
+/* Сучасний вигляд кнопок при наведенні */
 button {
-    border: none;
+    border: 2px solid #4CAF50;
     outline: none;
     cursor: pointer;
     background-color: #4CAF50;
@@ -248,9 +266,10 @@ button {
     border-radius: 25px;
     font-size: 1.1em;
     font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 button:hover {
     background-color: #388E3C;
+    border-color: #388E3C;
 }
