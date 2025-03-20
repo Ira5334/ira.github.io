@@ -1,4 +1,4 @@
-/* Загальні стилі */
+/* Загальні стилі для всіх сторінок */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -16,7 +16,7 @@ header {
 
 header h1 {
     color: white;
-    font-size: 2em;
+    font-size: 2.5em;
     margin: 0;
 }
 
@@ -26,36 +26,31 @@ nav ul {
     padding: 0;
     text-align: center;
     background-color: #388E3C;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 nav ul li {
     display: inline;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1em;
-    padding: 8px 12px;
-    display: inline-block;
+    font-size: 1.2em;
 }
 
 nav ul li a:hover {
-    background-color: #2E7D32;
-    border-radius: 5px;
+    color: #f4f4f4;
 }
 
-/* Основний контент */
+/* Основний контент сторінок */
 main {
-    padding: 30px;
+    padding: 40px;
     background-color: white;
-    max-width: 1200px;
-    margin: auto;
 }
 
-/* Головна сторінка */
+/* Секції */
 .section-block {
     display: flex;
     justify-content: space-between;
@@ -67,7 +62,7 @@ main {
     background-color: #e6f9e6;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .section-block .block img {
@@ -78,7 +73,7 @@ main {
 
 h2 {
     color: #4CAF50;
-    font-size: 2em;
+    font-size: 2.5em;
     margin-bottom: 20px;
 }
 
@@ -88,54 +83,42 @@ p {
 }
 
 /* Сторінка номерів */
-#rooms {
+.room {
+    background-color: #e6f9e6;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-#rooms h2 {
-    color: #4CAF50;
+.room h3 {
     font-size: 2em;
-    margin-bottom: 20px;
-}
-
-/* Карточки номерів */
-.room {
-    display: flex;
-    align-items: center;
-    background-color: #e6f9e6;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: #4CAF50;
+    margin-bottom: 15px;
 }
 
 .room img {
-    width: 30%; /* Зменшено */
+    width: 80%;
     border-radius: 8px;
-    margin-right: 15px;
+    margin-bottom: 15px;
 }
 
 .room-info {
-    width: 65%;
-    text-align: left;
+    font-size: 1.2em;
+    line-height: 1.6;
 }
 
-.room-info h3 {
-    font-size: 1.5em;
-    color: #4CAF50;
-    margin-bottom: 10px;
-}
-
-.room-info p {
+.room-info .book-button {
+    margin-top: 15px;
     font-size: 1em;
-    line-height: 1.5;
 }
 
 /* Кнопка "Забронювати" */
 .book-button {
     background-color: #4CAF50;
     color: white;
-    padding: 6px 12px;
+    padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
     font-size: 1em;
@@ -147,127 +130,125 @@ p {
     background-color: #388E3C;
 }
 
-/* Сторінка бронювання */
-.booking-page {
+/* Сторінка входу */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     background-color: #e6f9e6;
+}
+
+.login-form {
+    background-color: white;
     padding: 30px;
     border-radius: 8px;
-    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
 }
 
-.booking-page h2 {
+.login-form h2 {
     color: #4CAF50;
     font-size: 2em;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-.booking-page form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.booking-page form label {
-    color: #333;
-    display: block;
-    margin-top: 10px;
-    font-size: 1em;
-}
-
-.booking-page form input,
-.booking-page form select {
-    padding: 8px;
+.login-form input {
     width: 100%;
-    background-color: #f4f4f4;
+    padding: 10px;
+    margin-top: 10px;
     border: 1px solid #4CAF50;
-    color: #333;
-    font-size: 1em;
     border-radius: 5px;
+    font-size: 1.1em;
 }
 
-.booking-page form button {
-    padding: 10px 15px;
+.login-form button {
     background-color: #4CAF50;
     color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1.1em;
+    width: 100%;
     margin-top: 15px;
 }
 
-.booking-page form button:hover {
+.login-form button:hover {
     background-color: #388E3C;
 }
 
-/* Стилі для картки послуг */
-.service {
+/* Сторінка бронювання */
+.booking-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     background-color: #e6f9e6;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding-bottom: 60px;
 }
 
-.service h3 {
-    color: #4CAF50;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.service p {
-    font-size: 1em;
-}
-
-/* Форма контактів */
-.contact-form {
+.booking-container {
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 450px;
 }
 
-.contact-form label {
-    display: block;
-    margin-top: 10px;
-    font-size: 1em;
+.booking-container h2 {
+    color: #4CAF50;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.booking-container form label {
     color: #333;
+    display: block;
+    margin-top: 15px;
+    font-size: 1.1em;
 }
 
-.contact-form input,
-.contact-form textarea {
+.booking-container form input,
+.booking-container form select {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-top: 5px;
     border: 1px solid #4CAF50;
     border-radius: 5px;
+    font-size: 1.1em;
 }
 
-.contact-form button {
-    padding: 10px 15px;
+.booking-container form button {
+    width: 100%;
+    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
+    font-size: 1.1em;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
-.contact-form button:hover {
+.booking-container form button:hover {
     background-color: #388E3C;
 }
 
-/* Закріплений футер */
+/* Фіксований футер */
 footer {
     background-color: #4CAF50;
     color: white;
     text-align: center;
     padding: 15px;
-    position: fixed;
     width: 100%;
+    position: fixed;
     bottom: 0;
+    left: 0;
 }
 
 footer p {
-    font-size: 0.9em;
-    margin: 0;
+    font-size: 1em;
 }
