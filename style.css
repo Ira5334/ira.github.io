@@ -93,7 +93,7 @@ p {
     line-height: 1.6;
 }
 
-/* Сторінка номерів */
+/* Сторінка номерів - зміни для розташування фото поруч */
 .room-container {
     display: flex;
     flex-wrap: wrap;
@@ -241,10 +241,10 @@ p {
     background-color: #388E3C;
 }
 
-/* Галерея */
+/* Галерея - фото вдвічі менше і розташовані поруч */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* Змінено на 4 колонки */
     gap: 15px;
     margin-bottom: 40px;
     padding: 0 20px;
@@ -252,7 +252,8 @@ p {
 
 .gallery img {
     width: 100%;
-    max-width: 100%; /* Фото менше */
+    height: auto;
+    max-width: 90%; /* Зменшено на 50% */
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
