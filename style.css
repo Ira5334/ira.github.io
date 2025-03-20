@@ -1,23 +1,26 @@
 /* Загальні стилі для всіх сторінок */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
     color: #333;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
 /* Шапка сайту */
 header {
     background-color: #4CAF50;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
+    border-bottom: 2px solid #388E3C;
 }
 
 header h1 {
     color: white;
-    font-size: 2.5em;
+    font-size: 2.8em;
     margin: 0;
+    letter-spacing: 2px;
 }
 
 /* Меню навігації */
@@ -27,17 +30,20 @@ nav ul {
     text-align: center;
     background-color: #388E3C;
     margin-top: 20px;
+    border-top: 3px solid #4CAF50;
 }
 
 nav ul li {
     display: inline;
-    margin-right: 20px;
+    margin-right: 25px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
@@ -46,8 +52,9 @@ nav ul li a:hover {
 
 /* Основний контент сторінок */
 main {
-    padding: 40px;
+    padding: 60px 40px;
     background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Секції */
@@ -59,10 +66,15 @@ main {
 
 .section-block .block {
     width: 48%;
-    background-color: #e6f9e6;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f4f4f4;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.section-block .block:hover {
+    transform: translateY(-5px);
 }
 
 .section-block .block img {
@@ -78,179 +90,8 @@ h2 {
 }
 
 p {
-    font-size: 1.1em;
-    line-height: 1.6;
-}
-
-/* Сторінка номерів */
-.room {
-    background-color: #e6f9e6;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.room h3 {
-    font-size: 2em;
-    color: #4CAF50;
-    margin-bottom: 15px;
-}
-
-.room img {
-    width: 80%;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.room-info {
     font-size: 1.2em;
-    line-height: 1.6;
-}
-
-.room-info .book-button {
-    margin-top: 15px;
-    font-size: 1em;
-}
-
-/* Кнопка "Забронювати" */
-.book-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1em;
-    transition: background 0.3s ease;
-    display: inline-block;
-}
-
-.book-button:hover {
-    background-color: #388E3C;
-}
-
-/* Сторінка входу */
-.login-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #e6f9e6;
-}
-
-.login-form {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    text-align: center;
-}
-
-.login-form h2 {
-    color: #4CAF50;
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.login-form input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #4CAF50;
-    border-radius: 5px;
-    font-size: 1.1em;
-}
-
-.login-form button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    width: 100%;
-    margin-top: 15px;
-}
-
-.login-form button:hover {
-    background-color: #388E3C;
-}
-
-/* Сторінка бронювання */
-.booking-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #e6f9e6;
-    padding-bottom: 60px;
-}
-
-.booking-container {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 450px;
-}
-
-.booking-container h2 {
-    color: #4CAF50;
-    font-size: 2em;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.booking-container form label {
-    color: #333;
-    display: block;
-    margin-top: 15px;
-    font-size: 1.1em;
-}
-
-.booking-container form input,
-.booking-container form select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #4CAF50;
-    border-radius: 5px;
-    font-size: 1.1em;
-}
-
-.booking-container form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.booking-container form button:hover {
-    background-color: #388E3C;
-}
-
-/* Фіксований футер */
-footer {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-}
-
-footer p {
-    font-size: 1em;
+    line-height: 1.7;
 }
 
 /* Стилі для фотогалереї */
@@ -258,47 +99,56 @@ footer p {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
     margin-top: 40px;
+}
+
+.gallery-container h2 {
+    color: #4CAF50;
+    font-size: 2.8em;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .gallery-grid img {
     width: 100%;
     max-width: 370px;
     height: auto;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .gallery-grid img:hover {
     transform: scale(1.05);
-}
-
-.gallery-container h2 {
-    color: #4CAF50;
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Стилі для відгуків */
 .review-section {
-    margin-top: 20px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
 
 .review {
     background-color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.review:hover {
+    transform: translateY(-5px);
 }
 
 .review .author {
     font-weight: bold;
+    font-size: 1.2em;
     margin-bottom: 10px;
+    color: #388E3C;
 }
 
 .review .date {
@@ -308,6 +158,114 @@ footer p {
 }
 
 .review .content {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
+}
+
+/* Кнопки для галереї, відгуків та контактів */
+button.gallery-btn, button.review-btn, button.contact-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+}
+
+button.gallery-btn:hover, button.review-btn:hover, button.contact-btn:hover {
+    background-color: #388E3C;
+    transform: translateY(-2px);
+}
+
+/* Стилі для контактів */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.contact-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.contact-form h2 {
+    color: #4CAF50;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 8px;
+    font-size: 1.2em;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #388E3C;
+}
+
+/* Фіксований футер */
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 2px solid #388E3C;
+}
+
+footer p {
+    font-size: 1.1em;
+    margin: 0;
+}
+
+/* Кнопки у футері */
+footer .footer-btn {
+    background-color: #388E3C;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+footer .footer-btn:hover {
+    background-color: #4CAF50;
+    transform: translateY(-2px);
 }
