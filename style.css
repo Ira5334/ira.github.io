@@ -12,7 +12,7 @@ body {
     position: relative;
     width: 100%;
     height: 100vh; /* Висота на весь екран */
-    background: url('https://travel.rbc.ua/static/img/5/e/5e1a4218-579d-4892-b5c7-bf232d792d2c.jpg') no-repeat center center/cover;
+    background: url('https://www.rbc.ua/static/img/1/2/121_17_1200x675.jpg') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
