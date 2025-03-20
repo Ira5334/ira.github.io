@@ -5,6 +5,7 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    padding-bottom: 80px; /* Додано місце для футера */
 }
 
 /* Шапка сайту */
@@ -153,17 +154,18 @@ p {
 /* Фотогалерея */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); /* Розташування 3 зображень поруч */
+    gap: 10px; /* Зменшено відстань між зображеннями */
     margin-bottom: 40px;
 }
 
 .gallery img {
-    width: 100%;
+    width: 100%; /* Зображення займають всю ширину клітинки */
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 3px solid transparent;
+    max-height: 200px; /* Обмеження максимального розміру зображень */
 }
 
 .gallery img:hover {
@@ -199,10 +201,9 @@ footer {
     text-align: center;
     padding: 15px;
     width: 100%;
-    position: fixed;
+    position: relative; /* Змінив позицію футера на відносну */
     bottom: 0;
     left: 0;
-    z-index: 1000;
 }
 
 footer p {
@@ -216,7 +217,7 @@ footer .footer-buttons {
 footer .footer-buttons a {
     color: white;
     text-decoration: none;
-    background-color: #388E3C;
+    background-color: #FFFFFF; /* Білий колір */
     padding: 10px 20px;
     border-radius: 30px;
     margin: 0 10px;
@@ -227,8 +228,8 @@ footer .footer-buttons a {
 }
 
 footer .footer-buttons a:hover {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+    background-color: #388E3C; /* Темно-зелений при наведенні */
+    border-color: #388E3C;
 }
 
 /* Стилі для модальних вікон */
