@@ -7,6 +7,37 @@ body {
     padding: 0;
 }
 
+/* Головна сторінка - фонове зображення */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Висота на весь екран */
+    background: url('https://travel.rbc.ua/static/img/5/e/5e1a4218-579d-4892-b5c7-bf232d792d2c.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    background: rgba(255, 255, 255, 0.9); /* Білий лист із легким прозорим ефектом */
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 70%;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content h1 {
+    color: #388E3C;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    color: #333;
+}
+
 /* Шапка */
 header {
     background-color: #4CAF50;
@@ -59,7 +90,7 @@ main {
     background-color: white;
 }
 
-/* Рамки для розділів */
+/* Блоки розділів */
 .section-container {
     display: flex;
     flex-wrap: wrap;
@@ -88,6 +119,7 @@ main {
     transform: scale(1.05);
 }
 
+/* Заголовки */
 h2 {
     color: #4CAF50;
     font-size: 2.5em;
@@ -100,102 +132,82 @@ p {
     line-height: 1.6;
 }
 
-/* Рамки для сторінок "Номери", "Акції", "Послуги", "Відгуки" */
-.room-container,
-.promo-container,
-.service-container,
-.review-container {
+/* Сторінка номерів */
+.room-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 40px;
+    gap: 20px;
 }
 
-.room,
-.promo,
-.service,
-.review {
+.room {
+    width: 48%;
     background-color: #e6f9e6;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
     border: 2px solid #388E3C;
-    width: 48%;
-    margin-bottom: 20px;
+    text-align: center;
 }
 
-.room img,
-.promo img,
-.service img {
-    width: 100%;
+.room img {
+    width: 48%;
     height: auto;
-    margin-bottom: 15px;
     border-radius: 8px;
     transition: transform 0.3s ease;
 }
 
-.room img:hover,
-.promo img:hover,
-.service img:hover {
+.room img:hover {
     transform: scale(1.05);
 }
 
-h3 {
-    font-size: 2em;
-    color: #4CAF50;
-    margin-bottom: 15px;
-    font-weight: 600;
+/* Виправлене модальне вікно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.room-info,
-.promo-info,
-.service-info,
-.review-info {
-    font-size: 1.1em;
-    line-height: 1.6;
-    margin-bottom: 15px;
+.modal img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
 }
 
-/* Кнопка бронювання */
-.book-button {
-    background-color: #4CAF50;
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
     color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    display: inline-block;
-    margin-top: 15px;
-    transition: background 0.3s ease;
-}
-
-.book-button:hover {
-    background-color: #388E3C;
+    cursor: pointer;
 }
 
 /* Галерея */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
-    margin-bottom: 40px;
-    padding: 0 20px;
 }
 
 .gallery img {
     width: 100%;
     height: auto;
-    max-width: 90%;
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .gallery img:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Футер */
