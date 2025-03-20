@@ -1,194 +1,135 @@
-/* Загальні стилі для всіх сторінок */ 
+/* Загальні стилі для всіх сторінок */
 body {
     font-family: 'Roboto', sans-serif; /* Сучасний шрифт */
-    background-color: #fafafa; /* Світлий фон */
+    background-color: #f0fdf4; /* Світло-зелений фон */
     color: #333;
     margin: 0;
     padding: 0;
     padding-bottom: 80px; /* Місце для футера */
 }
 
-/* Шапка сайту */
-header {
-    background-color: rgba(76, 175, 80, 0.9); /* Напівпрозорий фон */
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid #ddd; /* Легка лінія під шапкою */
-    border-radius: 8px 8px 0 0; /* Гострі кути згорнуті знизу */
-}
-
-header h1 {
-    color: white;
-    font-size: 2.5em;
-    margin: 0;
-    font-weight: bold;
-}
-
-/* Меню навігації */
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    text-align: center;
-    background-color: rgba(56, 142, 108, 0.9); /* Напівпрозорий фон */
-    margin-top: 20px;
-    border-radius: 8px;
-}
-
-nav ul li {
-    display: inline-block;
-    margin-right: 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2em;
-    font-weight: 500;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    border-radius: 5px;
-}
-
-nav ul li a:hover {
-    background-color: rgba(76, 175, 80, 0.9); /* Легкий фон при наведенні */
-    border-color: rgba(76, 175, 80, 0.9);
-}
-
-/* Основний контент сторінок */
-main {
+/* Стиль для сторінки бронювання */
+.booking-page {
     padding: 40px;
-    background-color: white;
+    background-color: #ffffff; /* Білий фон */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 40px auto; /* Центрування сторінки */
 }
 
-/* Секції */
-.section-block {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-}
-
-.section-block .block {
-    width: 48%;
-    background-color: rgba(230, 249, 230, 0.9); /* Напівпрозорий фон */
-    padding: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    border-radius: 8px;
-}
-
-.section-block .block:hover {
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
-}
-
-h2 {
-    color: #4CAF50;
+.booking-page h2 {
+    color: #4CAF50; /* Зелений колір для заголовків */
     font-size: 2.5em;
     margin-bottom: 20px;
     font-weight: 600;
-}
-
-p {
-    font-size: 1.1em;
-    line-height: 1.6;
-}
-
-/* Сторінка номерів */
-.room {
-    background-color: rgba(230, 249, 230, 0.9); /* Напівпрозорий фон */
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.booking-form label {
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 500;
+}
+
+.booking-form input, .booking-form select, .booking-form textarea {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
     border-radius: 8px;
+    transition: border 0.3s ease;
 }
 
-.room h3 {
-    font-size: 2em;
-    color: #4CAF50;
-    margin-bottom: 15px;
-    font-weight: 600;
+.booking-form input:focus, .booking-form select:focus, .booking-form textarea:focus {
+    border-color: #4CAF50; /* Зелений колір при фокусі */
+    outline: none;
 }
 
-.room img {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease;
-}
-
-.room img:hover {
-    transform: scale(1.05);
-}
-
-/* Кнопка "Забронювати" */
-.book-button {
+.booking-form button {
     background-color: #4CAF50;
     color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1em;
-    transition: background 0.3s ease, border-color 0.3s ease;
-    display: inline-block;
-    border: 2px solid transparent;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.book-button:hover {
-    background-color: #388E3C;
-    border-color: #388E3C;
+.booking-form button:hover {
+    background-color: #388E3C; /* Темно-зелений колір при наведенні */
 }
 
-/* Фотогалерея як колаж */
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Зменшення розміру фото і більше колонок */
-    gap: 15px; /* Збільшено відстань між фото */
-    margin-bottom: 40px;
-}
-
-.gallery img {
-    width: 100%;
-    height: 100%;
-    border-radius: 12px; /* Гострі кути */
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 3px solid transparent;
-    object-fit: cover; /* Картинки тепер правильно заповнюють клітинки */
-}
-
-.gallery img:hover {
-    transform: scale(1.1); /* Легке збільшення фото */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border: 3px solid #4CAF50;
-}
-
-/* Модальне вікно для збільшених фото */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+/* Стиль для сторінки входу */
+.login-page {
+    display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-color: #f0fdf4; /* Світло-зелений фон */
 }
 
-.modal img {
-    width: 80%;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.login-form {
+    background-color: #ffffff; /* Білий фон */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Обмеження ширини форми */
 }
 
-/* Кнопки на нижньому колонтитулі */
+.login-form h2 {
+    color: #4CAF50; /* Зелений колір заголовка */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.login-form label {
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 500;
+}
+
+.login-form input {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: border 0.3s ease;
+}
+
+.login-form input:focus {
+    border-color: #4CAF50; /* Зелений колір при фокусі */
+    outline: none;
+}
+
+.login-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #388E3C; /* Темно-зелений колір при наведенні */
+}
+
+/* Футер */
 footer {
     background-color: rgba(76, 175, 80, 0.9); /* Напівпрозорий фон */
     color: white;
