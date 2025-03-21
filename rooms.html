@@ -25,6 +25,20 @@
     <section id="rooms">
         <h2>Наші номери та ціни</h2>
         <p>У готелі "Горизонт" ми пропонуємо вам комфортні номери для будь-якого типу відпочинку. Ознайомтесь з нашим асортиментом номерів та цінами.</p>
+        <p>Оберіть дати, щоб перевірити доступність номерів у готелі "Горизонт".</p>
+
+        <!-- ФОРМА ПЕРЕВІРКИ ДОСТУПНОСТІ -->
+        <form action="rooms.php" method="GET">
+            <label for="check_in">Дата заїзду:</label>
+            <input type="date" id="check_in" name="check_in" required>
+
+            <label for="check_out">Дата виїзду:</label>
+            <input type="date" id="check_out" name="check_out" required>
+
+            <button type="submit">Перевірити доступність</button>
+        </form>
+
+        <hr>
         
         <div class="room">
             <img src="https://karpatykruiz.com.ua/assets/cache/images/shidnytsia/complexes/osonnia/Osonnya_ekonom_305_02-740x620.jpg" alt="Номер Економ">
