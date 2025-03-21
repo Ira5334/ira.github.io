@@ -102,57 +102,5 @@
     <a href="contact.html">Контакти</a>
 </footer>
 
-    <!-- ПІДКЛЮЧЕННЯ СКРИПТУ -->
-<script>
-// Завантажуємо JSON-файл для оновлення статусу номерів
-let roomsData = {};
-
-fetch('rooms.json')
-    .then(response => response.json())
-    .then(data => {
-        roomsData = data;
-        updateRoomStatuses();
-    })
-    .catch(error => {
-        console.error('Помилка при завантаженні даних:', error);
-        // Якщо сталася помилка при завантаженні JSON
-        document.querySelectorAll('.availability-status').forEach(element => {
-            element.textContent = 'Помилка завантаження';
-        });
-    });
-
-function updateRoomStatuses() {
-    // Оновлюємо статуси номерів
-    roomsData.rooms.forEach(room => {
-        const roomStatusElement = document.getElementById(`status-${room.id}`);
-        roomStatusElement.textContent = 'Вільний';
-    });
-}
-
-function checkAvailability() {
-    const checkInDate = new Date(document.getElementById('check_in').value);
-    const checkOutDate = new Date(document.getElementById('check_out').value);
-    
-    roomsData.rooms.forEach(room => {
-        let isAvailable = true;
-
-        // Перевіряємо кожен період доступності для номера
-        room.availability.forEach(period => {
-            const startDate = new Date(period.start);
-            const endDate = new Date(period.end);
-
-            // Якщо дата заїзду або виїзду перетинається з періодом зайнятості, номер недоступний
-            if ((checkInDate >= startDate && checkInDate <= endDate) || (checkOutDate >= startDate && checkOutDate <= endDate)) {
-                isAvailable = false;
-            }
-        });
-
-        // Оновлюємо статус номера
-        const roomStatusElement = document.getElementById(`status-${room.id}`);
-        roomStatusElement.textContent = isAvailable ? 'Вільний' : 'Зайнято';
-    });
-}
-</script>
-    
 </body>
 </html>
