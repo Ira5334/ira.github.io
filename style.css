@@ -138,15 +138,16 @@ main {
     transform: scale(1.05);
 }
 
-/* Сторінки акцій, послуг, контактів */
-.service-container, .promotion-container, .contact-container {
+/* Сторінка акцій */
+
+.promotion-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
 
-.service-box, .promotion-box, .contact-box {
+.promotion-box {
     width: 48%;
     background-color: #e6f9e6;
     padding: 20px;
@@ -156,8 +157,56 @@ main {
     text-align: center;
 }
 
-/* Оновлений стиль для сторінок послуг, акцій та відгуків: окремі блоки для кожного тексту */
-.service-text, .promotion-text, .contact-text {
+/* Окремі блоки для тексту акцій */
+.promotion-text {
+    background-color: #e6f9e6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #388E3C;
+    margin-top: 20px;
+    text-align: left;
+}
+/* Сторінка послуг */
+
+.service-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.service-box {
+    width: 48%;
+    background-color: #e6f9e6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #388E3C;
+    text-align: center;
+}
+
+/* Окремі блоки для тексту послуг */
+.service-text {
+    background-color: #e6f9e6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #388E3C;
+    margin-top: 20px;
+    text-align: left;
+}
+/* Сторінка відгуків */
+
+.review-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Окремі блоки для тексту відгуків */
+.review-text {
     background-color: #e6f9e6;
     padding: 20px;
     border-radius: 10px;
