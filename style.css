@@ -109,6 +109,7 @@ main {
 }
 
 /* Сторінка номерів */
+
 .room-container {
     display: flex;
     flex-wrap: wrap;
@@ -138,6 +139,19 @@ main {
     transform: scale(1.05);
 }
 
+/* Окремі блоки для тексту */
+.room-text {
+    background-color: #e6f9e6;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #388E3C;
+    margin-top: 20px;
+    text-align: left;
+    display: inline-block;
+    width: 48%;
+    margin-bottom: 20px;
+}
+
 /* Сторінка акцій */
 
 .promotion-container {
@@ -162,11 +176,14 @@ main {
     background-color: #e6f9e6;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border: 2px solid #388E3C;
     margin-top: 20px;
     text-align: left;
+    display: inline-block;
+    width: 48%;
+    margin-bottom: 20px;
 }
+
 /* Сторінка послуг */
 
 .service-container {
@@ -191,11 +208,14 @@ main {
     background-color: #e6f9e6;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border: 2px solid #388E3C;
     margin-top: 20px;
     text-align: left;
+    display: inline-block;
+    width: 48%;
+    margin-bottom: 20px;
 }
+
 /* Сторінка відгуків */
 
 .review-container {
@@ -210,11 +230,14 @@ main {
     background-color: #e6f9e6;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border: 2px solid #388E3C;
     margin-top: 20px;
     text-align: left;
+    display: inline-block;
+    width: 48%;
+    margin-bottom: 20px;
 }
+
 
 /* Виправлене модальне вікно */
 .modal {
