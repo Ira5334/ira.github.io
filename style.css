@@ -263,25 +263,26 @@ main {
 /* Галерея */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Визначаємо мінімальний розмір */
-    gap: 10px; /* Зменшуємо відстань між фото */
-}
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* 4-5 фото в рядку */
+    gap: 8px; /* Менша відстань між фото */
+    justify-content: center;
+    align-items: center;
+} 
 
 /* Фото в галереї */
 .gallery img {
-    width: 100%; /* Фото займає 100% ширини кожного блоку */
-    height: auto;
-    border-radius: 8px;
+    width: 100%; /* Заповнює батьківський контейнер */
+    height: 100px; /* Фіксована висота для рівномірного вигляду */
+    border-radius: 6px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    object-fit: cover; /* Підгонка фото, щоб воно не деформувалося */
+    object-fit: cover; /* Обрізка фото без спотворень */
 }
 
-/* При наведенні збільшуємо фото */
+/* При наведенні злегка збільшуємо фото */
 .gallery img:hover {
-    transform: scale(1.05);
+    transform: scale(1.07);
 }
-
 
 /* Футер */
 footer {
