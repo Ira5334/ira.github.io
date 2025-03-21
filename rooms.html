@@ -102,5 +102,26 @@
     <a href="contact.html">Контакти</a>
 </footer>
 
+    <!-- ПІДКЛЮЧЕННЯ СКРИПТУ -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("availability.json")
+        .then(response => response.json())
+        .then(data => {
+            document.querySelectorAll(".room").forEach(room => {
+                let roomType = room.querySelector("a").getAttribute("href").split("=")[1].split("&")[0];
+                let statusElement = room.querySelector(".availability-status");
+                if (data[roomType]) {
+                    statusElement.textContent = "Статус: " + data[roomType];
+                    statusElement.style.color = data[roomType] === "Вільний" ? "green" : "red";
+                } else {
+                    statusElement.textContent = "Невідомий статус";
+                }
+            });
+        })
+        .catch(error => console.error("Помилка завантаження статусу:", error));
+});
+</script>
+    
 </body>
 </html>
