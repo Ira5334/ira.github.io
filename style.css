@@ -118,14 +118,16 @@ main {
 }
 
 .room {
-    width: calc(50% - 10px); /* Два рівних стовпці, враховуючи відступ */
+    width: 50%; /* Ширина 50%, два номери в рядку */
+    flex-basis: 50%; /* Додано flex-basis */
     background-color: #e6f9e6;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border: 2px solid #388E3C;
     text-align: center;
-    margin: 0px; /* Відступи для рівномірного розташування */
+    margin: 10px;
+    box-sizing: border-box; /* Важливо для коректного розрахунку ширини */
 }
 
 .room img {
@@ -157,65 +159,65 @@ main {
 .promotion-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
+    gap: 20px;
 }
 
 .promotion-box {
-    width: calc(50% - 20px); /* Дві колонки */
-    background: rgba(255, 255, 255, 0.7); /* Напівпрозорий фон */
+    width: 48%;
+    background-color: rgba(230, 249, 230, 0.8); /* Напівпрозорий фон */
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border: 2px solid #388E3C;
     text-align: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Важливо для коректного розрахунку ширини */
 }
 
-/* Окремі блоки для тексту акцій */
 .promotion-text {
-    background-color: #e6f9e6;
+    background-color: rgba(230, 249, 230, 0.8); /* Напівпрозорий фон */
     padding: 20px;
     border-radius: 10px;
     border: 2px solid #388E3C;
     margin-top: 20px;
     text-align: left;
     display: inline-block;
-    width: 48%;
+    width: 100%; /* Займає всю ширину блоку */
     margin-bottom: 20px;
-}
+    box-sizing: border-box; /* Важливо для коректного розрахунку ширини */
 
 /* Сторінка послуг */
 
 .service-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
+    gap: 20px;
 }
 
 .service-box {
-    width: calc(50% - 20px); /* Дві колонки */
-    background: rgba(255, 255, 255, 0.7);
+    width: 48%;
+    background-color: rgba(230, 249, 230, 0.8); /* Напівпрозорий фон */
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border: 2px solid #388E3C;
     text-align: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Важливо для коректного розрахунку ширини */
 }
 
-/* Окремі блоки для тексту послуг */
 .service-text {
-    background-color: #e6f9e6;
+    background-color: rgba(230, 249, 230, 0.8); /* Напівпрозорий фон */
     padding: 20px;
     border-radius: 10px;
     border: 2px solid #388E3C;
     margin-top: 20px;
     text-align: left;
     display: inline-block;
-    width: 48%;
+    width: 100%; /* Займає всю ширину блоку */
     margin-bottom: 20px;
+    box-sizing: border-box; /* Важливо для коректного розрахунку ширини */
 }
-
 /* Сторінка відгуків */
 
 .review-container {
