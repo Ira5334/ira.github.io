@@ -22,7 +22,7 @@
 
     <main>
         <h2>Оформлення бронювання</h2>
-        <form action="process_booking.php" method="POST">
+        <form action="process_booking.php" method="POST" class="booking-form">
             <label for="room_type">Тип номера:</label>
             <input type="text" id="room_type" name="room_type" value="" readonly>
 
@@ -58,7 +58,6 @@
             document.getElementById("room_type").value = roomType;
         }
         if (price) {
-            document.getElementById("price").value = price;
             document.getElementById("total_price").value = price; // Початкове значення загальної вартості
         }
     </script>
