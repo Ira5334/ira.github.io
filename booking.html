@@ -54,8 +54,8 @@
         const roomType = params.get("room_type");
         const price = params.get("price");
 
-        if (roomType && document.getElementById("room_type")) {
-        document.getElementById("room_type").value = decodeURIComponent(roomType);
+       if (roomType) {
+    document.getElementById("room_type").value = roomType;
         }
         if (price) {
              document.getElementById("price").value = price;
