@@ -120,6 +120,63 @@ main {
     transform: scale(1.05);
 }
 
+/* Контейнер форми бронювання */
+.booking-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Центруємо по висоті */
+    background-color: rgba(76, 175, 80, 0.2); /* Світло-зелений напівпрозорий фон */
+}
+
+/* Стилізація самої форми */
+.booking-form {
+    background: rgba(76, 175, 80, 0.9); /* Насичений зелений, але напівпрозорий */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 50%; /* Ширина форми */
+    max-width: 400px; /* Щоб на великих екранах форма не розтягувалась */
+}
+
+/* Заголовок форми */
+.booking-form h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Поля введення */
+.booking-form input, 
+.booking-form select, 
+.booking-form textarea {
+    width: 100%; /* Щоб поля заповнювали всю ширину */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #388E3C;
+    border-radius: 8px;
+    font-size: 1em;
+    background: white;
+}
+
+/* Кнопка */
+.booking-form button {
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.booking-form button:hover {
+    background-color: #388E3C;
+}
+
 /* Галерея */
 .gallery {
     display: grid;
