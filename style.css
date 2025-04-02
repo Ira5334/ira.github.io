@@ -199,30 +199,21 @@ main {
     margin-bottom: 20px;
 }
 
-/* Контейнер форми бронювання */
-.booking-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Центруємо по висоті */
-    background-color: rgba(76, 175, 80, 0.2); /* Світло-зелений напівпрозорий фон */
-}
-
-/* Стилізація самої форми */
+/* Контейнер для форми */
 .booking-form {
-    background: rgba(76, 175, 80, 0.9); /* Насичений зелений, але напівпрозорий */
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 50%; /* Ширина форми */
-    max-width: 400px; /* Щоб на великих екранах форма не розтягувалась */
+    max-width: 600px; /* Максимальна ширина форми */
+    margin: 0 auto; /* Центрування форми */
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Заголовок форми */
 .booking-form h2 {
     color: white;
     margin-bottom: 20px;
+    text-align: center; /* Центрування заголовка */
 }
 
 /* Поля введення */
