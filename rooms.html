@@ -103,56 +103,69 @@
 </footer>
 
 <script>
-document.getElementById("availability-form").addEventListener("submit", function (e) {
-    e.preventDefault();
+document.getElementById('availability-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    const checkIn = new Date(document.getElementById("check_in").value);
-    const checkOut = new Date(document.getElementById("check_out").value);
+    const checkInDate = document.getElementById('check_in').value;
+    const checkOutDate = document.getElementById('check_out').value;
+
+    if (!checkInDate || !checkOutDate) return;
 
     fetch('check_availability.json')
         .then(response => response.json())
         .then(data => {
-            const roomStatus = {};
+            const dateRange = getDateRange(checkInDate, checkOutDate);
+            const roomAvailability = dateRange.map(date => new Set(data[date] || []));
 
-            data.rooms.forEach(room => {
-                roomStatus[room.room_type] ??= [];
-                roomStatus[room.room_type].push({ ...room, available: true });
-            });
+            const roomDivs = document.querySelectorAll('.room');
 
-            data.reservations.forEach(reservation => {
-                const resRoom = data.rooms.find(room => room.room_id === reservation.room_id);
-                const resCheckIn = new Date(reservation.check_in_date);
-                const resCheckOut = new Date(reservation.check_out_date);
+            roomDivs.forEach(room => {
+                const status = room.querySelector('.availability-status');
+                const bookBtn = room.querySelector('.book-button');
+                const roomNumbers = room.textContent.match(/№\d+/g)?.map(n => n.slice(1)) || [];
 
-                const overlaps = (checkIn < resCheckOut) && (checkOut > resCheckIn);
+                const availableRooms = new Set(roomNumbers.filter(num => 
+                    roomAvailability.every(dateRooms => !dateRooms.has(num))
+                ));
 
-                if (overlaps) {
-                    const type = resRoom.room_type;
-                    roomStatus[type] = roomStatus[type].map(r =>
-                        r.room_id === resRoom.room_id ? { ...r, available: false } : r
-                    );
-                }
-            });
-
-            document.querySelectorAll(".room").forEach(roomEl => {
-                const title = roomEl.querySelector("h3").innerText.trim();
-                const statusEl = roomEl.querySelector(".availability-status");
-
-                if (roomStatus[title]) {
-                    const anyAvailable = roomStatus[title].some(r => r.available);
-                    statusEl.innerText = anyAvailable ? "✅Доступно" : "❌Недоступно";
-                    statusEl.style.color = anyAvailable ? "green" : "red";
+                if (availableRooms.size > 0) {
+                    status.textContent = '✅ Доступно';
+                    status.style.color = 'green';
+                    bookBtn.disabled = false;
+                    bookBtn.style.opacity = 1;
+                    bookBtn.style.pointerEvents = 'auto';
+                } else if (roomNumbers.some(num => 
+                    roomAvailability.some(dateRooms => dateRooms.has(num))
+                )) {
+                    status.textContent = '❌ Недоступно';
+                    status.style.color = 'red';
+                    bookBtn.disabled = true;
+                    bookBtn.style.opacity = 0.5;
+                    bookBtn.style.pointerEvents = 'none';
                 } else {
-                    statusEl.innerText = "⚪Невідомо";
-                    statusEl.style.color = "gray";
+                    status.textContent = '—';
+                    status.style.color = 'gray';
+                    bookBtn.disabled = true;
+                    bookBtn.style.opacity = 0.5;
+                    bookBtn.style.pointerEvents = 'none';
                 }
             });
         })
-        .catch(err => {
-            console.error("Помилка завантаження даних:", err);
-            alert("Не вдалося завантажити дані про бронювання.");
+        .catch(error => {
+            console.error('Помилка при завантаженні:', error);
         });
 });
+
+function getDateRange(start, end) {
+    const dates = [];
+    let currentDate = new Date(start);
+    const endDate = new Date(end);
+    while (currentDate < endDate) {
+        dates.push(currentDate.toISOString().split('T')[0]);
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return dates;
+}
 </script>
     
 </body>
