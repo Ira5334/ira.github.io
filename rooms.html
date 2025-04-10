@@ -101,6 +101,59 @@
     <a href="reviews.html">Відгуки</a>
     <a href="contact.html">Контакти</a>
 </footer>
+
+<script>
+document.getElementById("availability-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const checkIn = new Date(document.getElementById("check_in").value);
+    const checkOut = new Date(document.getElementById("check_out").value);
+
+    fetch('check_availability.json')
+        .then(response => response.json())
+        .then(data => {
+            const roomStatus = {};
+
+            data.rooms.forEach(room => {
+                roomStatus[room.room_type] ??= [];
+                roomStatus[room.room_type].push({ ...room, available: true });
+            });
+
+            data.reservations.forEach(reservation => {
+                const resRoom = data.rooms.find(room => room.room_id === reservation.room_id);
+                const resCheckIn = new Date(reservation.check_in_date);
+                const resCheckOut = new Date(reservation.check_out_date);
+
+                const overlaps = (checkIn < resCheckOut) && (checkOut > resCheckIn);
+
+                if (overlaps) {
+                    const type = resRoom.room_type;
+                    roomStatus[type] = roomStatus[type].map(r =>
+                        r.room_id === resRoom.room_id ? { ...r, available: false } : r
+                    );
+                }
+            });
+
+            document.querySelectorAll(".room").forEach(roomEl => {
+                const title = roomEl.querySelector("h3").innerText.trim();
+                const statusEl = roomEl.querySelector(".availability-status");
+
+                if (roomStatus[title]) {
+                    const anyAvailable = roomStatus[title].some(r => r.available);
+                    statusEl.innerText = anyAvailable ? "Доступно" : "Недоступно";
+                    statusEl.style.color = anyAvailable ? "green" : "red";
+                } else {
+                    statusEl.innerText = "Невідомо";
+                    statusEl.style.color = "gray";
+                }
+            });
+        })
+        .catch(err => {
+            console.error("Помилка завантаження даних:", err);
+            alert("Не вдалося завантажити дані про бронювання.");
+        });
+});
+</script>
     
 </body>
 </html>
