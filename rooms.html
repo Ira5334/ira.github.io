@@ -46,8 +46,8 @@
 
     function isRoomAvailable(room, checkInDate, checkOutDate, reservations) {
         return !reservations.some(reservation => {
-            const resCheckInDate = new Date(reservation.check_in_date);
-            const resCheckOutDate = new Date(reservation.check_out_date);
+            const checkInDate = new Date(document.getElementById('check_in').value);
+            const checkOutDate = new Date(document.getElementById('check_out').value);
 
             // Перевіряємо, чи немає перетину дат
             return (checkInDate < resCheckOutDate && checkOutDate > resCheckInDate && reservation.room_id === room.room_id);
