@@ -102,67 +102,74 @@
     <a href="contact.html">Контакти</a>
 </footer>
 
-    <script>
-document.getElementById('availability-form').addEventListener('submit', function (event) {
-    event.preventDefault();
+<script>
+document.getElementById("availability-form").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    const checkIn = new Date(document.getElementById('check_in').value);
-    const checkOut = new Date(document.getElementById('check_out').value);
+    const checkIn = new Date(document.getElementById("check_in").value);
+    const checkOut = new Date(document.getElementById("check_out").value);
 
-    if (isNaN(checkIn) || isNaN(checkOut) || checkIn >= checkOut) {
-        alert('Будь ласка, введіть коректні дати.');
-        return;
-    }
-
-    fetch('check_availability')
+    fetch('check_availability.json')
         .then(response => response.json())
         .then(data => {
-            const roomTypes = ['ekonom', 'standart', 'lux', 'simeynyy', 'apartaments'];
+            const roomStatus = {};
 
-            roomTypes.forEach(type => {
-                const overlappingBooking = data.some(booking => {
-                    if (booking.room_type !== type) return false;
+            data.rooms.forEach(room => {
+                roomStatus[room.room_type] ??= [];
+                roomStatus[room.room_type].push({ ...room, available: true });
+            });
 
-                    const bookingCheckIn = new Date(booking.check_in);
-                    const bookingCheckOut = new Date(booking.check_out);
+            data.reservations.forEach(reservation => {
+                const resRoom = data.rooms.find(room => room.room_id === reservation.room_id);
+                const resCheckIn = new Date(reservation.check_in_date);
+                const resCheckOut = new Date(reservation.check_out_date);
 
-                    return checkIn < bookingCheckOut && checkOut > bookingCheckIn;
-                });
+                const overlaps = (checkIn < resCheckOut) && (checkOut > resCheckIn);
 
-                const roomElement = document.querySelector(`[href*="room_type=${type}"]`).closest('.room');
-                const statusElement = roomElement.querySelector('.availability-status');
-                const button = roomElement.querySelector('.book-button');
+                if (overlaps) {
+                    const type = resRoom.room_type;
+                    roomStatus[type] = roomStatus[type].map(r =>
+                        r.room_id === resRoom.room_id ? { ...r, available: false } : r
+                    );
+                }
+            });
 
-                if (overlappingBooking) {
-                    statusElement.textContent = 'Недоступно';
-                    statusElement.style.color = 'red';
-                    button.disabled = true;
-                    button.style.opacity = '0.5';
-                    button.style.pointerEvents = 'none';
+            document.querySelectorAll(".room").forEach(roomEl => {
+                const title = roomEl.querySelector("h3").innerText.trim();
+                const statusEl = roomEl.querySelector(".availability-status");
+                const bookBtn = roomEl.querySelector(".book-button");
+
+                if (roomStatus[title]) {
+                    const anyAvailable = roomStatus[title].some(r => r.available);
+                    if (anyAvailable) {
+                        statusEl.innerText = "✅ Доступно";
+                        statusEl.style.color = "green";
+                        bookBtn.classList.remove("disabled");
+                        bookBtn.style.pointerEvents = "auto";
+                        bookBtn.style.opacity = "1";
+                    } else {
+                        statusEl.innerText = "❌ Недоступно";
+                        statusEl.style.color = "red";
+                        bookBtn.classList.add("disabled");
+                        bookBtn.style.pointerEvents = "none";
+                        bookBtn.style.opacity = "0.5";
+                    }
                 } else {
-                    statusElement.textContent = 'Доступно';
-                    statusElement.style.color = 'green';
-                    button.disabled = false;
-                    button.style.opacity = '1';
-                    button.style.pointerEvents = 'auto';
+                    statusEl.innerText = "⚪ Невідомо";
+                    statusEl.style.color = "gray";
+                    bookBtn.classList.add("disabled");
+                    bookBtn.style.pointerEvents = "none";
+                    bookBtn.style.opacity = "0.5";
                 }
             });
         })
-        .catch(error => {
-            console.error('Помилка при завантаженні даних:', error);
-
-            document.querySelectorAll('.room').forEach(room => {
-                const statusElement = room.querySelector('.availability-status');
-                const button = room.querySelector('.book-button');
-                statusElement.textContent = 'Невідомо';
-                statusElement.style.color = 'gray';
-                button.disabled = true;
-                button.style.opacity = '0.5';
-                button.style.pointerEvents = 'none';
-            });
+        .catch(err => {
+            console.error("Помилка завантаження даних:", err);
+            alert("Не вдалося завантажити дані про бронювання.");
         });
 });
 </script>
+
     
 </body>
 </html>
