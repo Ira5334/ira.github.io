@@ -37,6 +37,56 @@
 
             <button type="submit">Перевірити доступність</button>
         </form>
+<script>
+    async function fetchRoomData() {
+        const response = await fetch('rooms_data.json');
+        const data = await response.json();
+        return data;
+    }
+
+    function isRoomAvailable(room, checkInDate, checkOutDate, reservations) {
+        return !reservations.some(reservation => {
+            const resCheckInDate = new Date(reservation.check_in_date);
+            const resCheckOutDate = new Date(reservation.check_out_date);
+
+            // Перевіряємо, чи немає перетину дат
+            return (checkInDate < resCheckOutDate && checkOutDate > resCheckInDate && reservation.room_id === room.room_id);
+        });
+    }
+
+    async function checkRoomAvailability() {
+        const checkInDate = new Date(document.getElementById('check-in-date').value);
+        const checkOutDate = new Date(document.getElementById('check-out-date').value);
+        
+        if (!checkInDate || !checkOutDate) {
+            alert("Будь ласка, виберіть дати заїзду та виїзду!");
+            return;
+        }
+
+        const data = await fetchRoomData();
+        const rooms = data.rooms;
+        const reservations = data.reservations;
+
+        const availableRooms = rooms.filter(room => isRoomAvailable(room, checkInDate, checkOutDate, reservations));
+
+        const roomListElement = document.getElementById('room-list');
+        roomListElement.innerHTML = ''; // Очищаємо список
+
+        if (availableRooms.length > 0) {
+            availableRooms.forEach(room => {
+                const roomElement = document.createElement('div');
+                roomElement.innerHTML = `
+                    <p>Номер: ${room.room_number} (${room.room_type})</p>
+                    <p>Ціна за ніч: ${room.price_per_night} грн</p>
+                    <p class="available">Доступний</p>
+                `;
+                roomListElement.appendChild(roomElement);
+            });
+        } else {
+            roomListElement.innerHTML = '<p>Немає доступних номерів на обрані дати.</p>';
+        }
+    }
+</script>
 
         <hr>
         
