@@ -102,70 +102,66 @@
     <a href="contact.html">Контакти</a>
 </footer>
 
-<script>
-document.getElementById('availability-form').addEventListener('submit', function(event) {
+    <script>
+document.getElementById('availability-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const checkInDate = document.getElementById('check_in').value;
-    const checkOutDate = document.getElementById('check_out').value;
+    const checkIn = new Date(document.getElementById('check_in').value);
+    const checkOut = new Date(document.getElementById('check_out').value);
 
-    if (!checkInDate || !checkOutDate) return;
+    if (isNaN(checkIn) || isNaN(checkOut) || checkIn >= checkOut) {
+        alert('Будь ласка, введіть коректні дати.');
+        return;
+    }
 
-    fetch('check_availability.json')
+    fetch('check_availability')
         .then(response => response.json())
         .then(data => {
-            const dateRange = getDateRange(checkInDate, checkOutDate);
-            const roomAvailability = dateRange.map(date => new Set(data[date] || []));
+            const roomTypes = ['ekonom', 'standart', 'lux', 'simeynyy', 'apartaments'];
 
-            const roomDivs = document.querySelectorAll('.room');
+            roomTypes.forEach(type => {
+                const overlappingBooking = data.some(booking => {
+                    if (booking.room_type !== type) return false;
 
-            roomDivs.forEach(room => {
-                const status = room.querySelector('.availability-status');
-                const bookBtn = room.querySelector('.book-button');
-                const roomNumbers = room.textContent.match(/№\d+/g)?.map(n => n.slice(1)) || [];
+                    const bookingCheckIn = new Date(booking.check_in);
+                    const bookingCheckOut = new Date(booking.check_out);
 
-                const availableRooms = new Set(roomNumbers.filter(num => 
-                    roomAvailability.every(dateRooms => !dateRooms.has(num))
-                ));
+                    return checkIn < bookingCheckOut && checkOut > bookingCheckIn;
+                });
 
-                if (availableRooms.size > 0) {
-                    status.textContent = '✅ Доступно';
-                    status.style.color = 'green';
-                    bookBtn.disabled = false;
-                    bookBtn.style.opacity = 1;
-                    bookBtn.style.pointerEvents = 'auto';
-                } else if (roomNumbers.some(num => 
-                    roomAvailability.some(dateRooms => dateRooms.has(num))
-                )) {
-                    status.textContent = '❌ Недоступно';
-                    status.style.color = 'red';
-                    bookBtn.disabled = true;
-                    bookBtn.style.opacity = 0.5;
-                    bookBtn.style.pointerEvents = 'none';
+                const roomElement = document.querySelector(`[href*="room_type=${type}"]`).closest('.room');
+                const statusElement = roomElement.querySelector('.availability-status');
+                const button = roomElement.querySelector('.book-button');
+
+                if (overlappingBooking) {
+                    statusElement.textContent = 'Недоступно';
+                    statusElement.style.color = 'red';
+                    button.disabled = true;
+                    button.style.opacity = '0.5';
+                    button.style.pointerEvents = 'none';
                 } else {
-                    status.textContent = '—';
-                    status.style.color = 'gray';
-                    bookBtn.disabled = true;
-                    bookBtn.style.opacity = 0.5;
-                    bookBtn.style.pointerEvents = 'none';
+                    statusElement.textContent = 'Доступно';
+                    statusElement.style.color = 'green';
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                    button.style.pointerEvents = 'auto';
                 }
             });
         })
         .catch(error => {
-            console.error('Помилка при завантаженні:', error);
+            console.error('Помилка при завантаженні даних:', error);
+
+            document.querySelectorAll('.room').forEach(room => {
+                const statusElement = room.querySelector('.availability-status');
+                const button = room.querySelector('.book-button');
+                statusElement.textContent = 'Невідомо';
+                statusElement.style.color = 'gray';
+                button.disabled = true;
+                button.style.opacity = '0.5';
+                button.style.pointerEvents = 'none';
+            });
         });
 });
-
-function getDateRange(start, end) {
-    const dates = [];
-    let currentDate = new Date(start);
-    const endDate = new Date(end);
-    while (currentDate < endDate) {
-        dates.push(currentDate.toISOString().split('T')[0]);
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
-    return dates;
-}
 </script>
     
 </body>
