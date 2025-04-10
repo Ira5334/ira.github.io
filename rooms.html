@@ -37,63 +37,9 @@
 
             <button type="submit">Перевірити доступність</button>
         </form>
-
-<script>
-    async function fetchRoomData() {
-        const response = await fetch('check_availability.json'); // Перевірте шлях до вашого файлу JSON
-        const data = await response.json();
-        return data;
-    }
-
-    function isRoomAvailable(room, checkInDate, checkOutDate, reservations) {
-        return !reservations.some(reservation => {
-            const resCheckInDate = new Date(reservation.check_in_date);
-            const resCheckOutDate = new Date(reservation.check_out_date);
-
-            // Перевіряємо, чи немає перетину дат
-            return (checkInDate < reservation.check_out_date && checkOutDate > reservation.check_in_date && reservation.room_id === room.room_id);
-        });
-    }
-
-    async function checkRoomAvailability(event) {
-        event.preventDefault(); // Забезпечуємо, щоб форма не перезавантажувала сторінку
-
-        const checkInDate = new Date(document.getElementById('check_in').value);
-        const checkOutDate = new Date(document.getElementById('check_out').value);
-
-        if (!checkInDate || !checkOutDate) {
-            alert("Будь ласка, виберіть дати заїзду та виїзду!");
-            return;
-        }
-
-        const data = await fetchRoomData();
-        const rooms = data.rooms;
-        const reservations = data.reservations;
-
-        const availableRooms = rooms.filter(room => isRoomAvailable(room, checkInDate, checkOutDate, reservations));
-
-        const roomListElement = document.getElementById('room-list');
-        roomListElement.innerHTML = ''; // Очищаємо список
-
-        if (availableRooms.length > 0) {
-            availableRooms.forEach(room => {
-                const roomElement = document.createElement('div');
-                roomElement.innerHTML = `
-                    <p>Номер: ${room.room_number} (${room.room_type})</p>
-                    <p>Ціна за ніч: ${room.price_per_night} грн</p>
-                    <p class="available">Доступний</p>
-                `;
-                roomListElement.appendChild(roomElement);
-            });
-        } else {
-            roomListElement.innerHTML = '<p>Немає доступних номерів на обрані дати.</p>';
-        }
-    }
-
-    // Додаємо обробник події для форми
-    document.getElementById('availability-form').addEventListener('submit', checkRoomAvailability);
-</script>
-
+        
+ <div id="room-list"></div>
+        
         <hr>
         
         <div class="room">
@@ -158,5 +104,55 @@
     <a href="contact.html">Контакти</a>
 </footer>
 
+    <script>
+    async function fetchRoomData() {
+        const response = await fetch('check_availability.json');
+        const data = await response.json();
+        return data;
+    }
+
+    function isRoomAvailable(room, checkInDate, checkOutDate, reservations) {
+        return !reservations.some(reservation => {
+            const resCheckInDate = new Date(reservation.check_in_date);
+            const resCheckOutDate = new Date(reservation.check_out_date);
+
+            // Перевірка перетину дат
+            return (checkInDate < resCheckOutDate && checkOutDate > resCheckInDate && reservation.room_id === room.room_id);
+        });
+    }
+
+    async function checkRoomAvailability(event) {
+        event.preventDefault();
+
+        const checkInDate = new Date(document.getElementById('check_in').value);
+        const checkOutDate = new Date(document.getElementById('check_out').value);
+
+        if (!checkInDate || !checkOutDate) {
+            alert("Будь ласка, виберіть дати заїзду та виїзду!");
+            return;
+        }
+
+        const data = await fetchRoomData();
+        const rooms = data.rooms;
+        const reservations = data.reservations;
+
+        // Оновлення статусу доступності для кожного номера
+        rooms.forEach(room => {
+            const roomElement = document.querySelector(`.room[data-room-id="${room.room_id}"]`);
+            const availabilityStatus = roomElement.querySelector('.availability-status');
+            if (isRoomAvailable(room, checkInDate, checkOutDate, reservations)) {
+                availabilityStatus.textContent = 'Доступний';
+                availabilityStatus.style.color = 'green';
+            } else {
+                availabilityStatus.textContent = 'Зайнятий';
+                availabilityStatus.style.color = 'red';
+            }
+        });
+    }
+
+    // Додавання обробника події для форми
+    document.getElementById('availability-form').addEventListener('submit', checkRoomAvailability);
+</script>
+    
 </body>
 </html>
