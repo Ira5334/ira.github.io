@@ -38,8 +38,6 @@
             <button type="submit">Перевірити доступність</button>
         </form>
         
- <div id="room-list"></div>
-        
         <hr>
         
         <div class="room">
@@ -103,56 +101,6 @@
     <a href="reviews.html">Відгуки</a>
     <a href="contact.html">Контакти</a>
 </footer>
-
-    <script>
-    async function fetchRoomData() {
-        const response = await fetch('check_availability.json');
-        const data = await response.json();
-        return data;
-    }
-
-    function isRoomAvailable(room, checkInDate, checkOutDate, reservations) {
-        return !reservations.some(reservation => {
-            const resCheckInDate = new Date(reservation.check_in_date);
-            const resCheckOutDate = new Date(reservation.check_out_date);
-
-            // Перевірка перетину дат
-            return (checkInDate < resCheckOutDate && checkOutDate > resCheckInDate && reservation.room_id === room.room_id);
-        });
-    }
-
-    async function checkRoomAvailability(event) {
-        event.preventDefault();
-
-        const checkInDate = new Date(document.getElementById('check_in').value);
-        const checkOutDate = new Date(document.getElementById('check_out').value);
-
-        if (!checkInDate || !checkOutDate) {
-            alert("Будь ласка, виберіть дати заїзду та виїзду!");
-            return;
-        }
-
-        const data = await fetchRoomData();
-        const rooms = data.rooms;
-        const reservations = data.reservations;
-
-        // Оновлення статусу доступності для кожного номера
-        rooms.forEach(room => {
-            const roomElement = document.querySelector(`.room[data-room-id="${room.room_id}"]`);
-            const availabilityStatus = roomElement.querySelector('.availability-status');
-            if (isRoomAvailable(room, checkInDate, checkOutDate, reservations)) {
-                availabilityStatus.textContent = 'Доступний';
-                availabilityStatus.style.color = 'green';
-            } else {
-                availabilityStatus.textContent = 'Зайнятий';
-                availabilityStatus.style.color = 'red';
-            }
-        });
-    }
-
-    // Додавання обробника події для форми
-    document.getElementById('availability-form').addEventListener('submit', checkRoomAvailability);
-</script>
     
 </body>
 </html>
