@@ -37,27 +37,31 @@
 
             <button type="submit">Перевірити доступність</button>
         </form>
+        <div id="room-list"></div>
+
 <script>
     async function fetchRoomData() {
-        const response = await fetch('check_availability.json');
+        const response = await fetch('check_availability.json'); // Перевірте шлях до вашого файлу JSON
         const data = await response.json();
         return data;
     }
 
     function isRoomAvailable(room, checkInDate, checkOutDate, reservations) {
         return !reservations.some(reservation => {
-            const checkInDate = new Date(document.getElementById('check_in').value);
-            const checkOutDate = new Date(document.getElementById('check_out').value);
+            const resCheckInDate = new Date(reservation.check_in);
+            const resCheckOutDate = new Date(reservation.check_out);
 
             // Перевіряємо, чи немає перетину дат
             return (checkInDate < resCheckOutDate && checkOutDate > resCheckInDate && reservation.room_id === room.room_id);
         });
     }
 
-    async function checkRoomAvailability() {
-        const checkInDate = new Date(document.getElementById('check-in-date').value);
-        const checkOutDate = new Date(document.getElementById('check-out-date').value);
-        
+    async function checkRoomAvailability(event) {
+        event.preventDefault(); // Забезпечуємо, щоб форма не перезавантажувала сторінку
+
+        const checkInDate = new Date(document.getElementById('check_in').value);
+        const checkOutDate = new Date(document.getElementById('check_out').value);
+
         if (!checkInDate || !checkOutDate) {
             alert("Будь ласка, виберіть дати заїзду та виїзду!");
             return;
@@ -86,6 +90,9 @@
             roomListElement.innerHTML = '<p>Немає доступних номерів на обрані дати.</p>';
         }
     }
+
+    // Додаємо обробник події для форми
+    document.getElementById('availability-form').addEventListener('submit', checkRoomAvailability);
 </script>
 
         <hr>
