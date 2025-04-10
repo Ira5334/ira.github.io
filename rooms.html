@@ -39,7 +39,7 @@
         </form>
 <script>
     async function fetchRoomData() {
-        const response = await fetch('rooms_data.json');
+        const response = await fetch('check_availability.json');
         const data = await response.json();
         return data;
     }
