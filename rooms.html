@@ -37,7 +37,6 @@
 
             <button type="submit">Перевірити доступність</button>
         </form>
-        <div id="room-list"></div>
 
 <script>
     async function fetchRoomData() {
@@ -48,11 +47,11 @@
 
     function isRoomAvailable(room, checkInDate, checkOutDate, reservations) {
         return !reservations.some(reservation => {
-            const resCheckInDate = new Date(reservation.check_in);
-            const resCheckOutDate = new Date(reservation.check_out);
+            const resCheckInDate = new Date(reservation.check_in_date);
+            const resCheckOutDate = new Date(reservation.check_out_date);
 
             // Перевіряємо, чи немає перетину дат
-            return (checkInDate < resCheckOutDate && checkOutDate > resCheckInDate && reservation.room_id === room.room_id);
+            return (checkInDate < reservation.check_out_date && checkOutDate > reservation.check_in_date && reservation.room_id === room.room_id);
         });
     }
 
