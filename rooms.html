@@ -140,10 +140,10 @@ document.getElementById("availability-form").addEventListener("submit", function
 
                 if (roomStatus[title]) {
                     const anyAvailable = roomStatus[title].some(r => r.available);
-                    statusEl.innerText = anyAvailable ? "Доступно" : "Недоступно";
+                    statusEl.innerText = anyAvailable ? "✅Доступно" : "❌Недоступно";
                     statusEl.style.color = anyAvailable ? "green" : "red";
                 } else {
-                    statusEl.innerText = "Невідомо";
+                    statusEl.innerText = "⚪Невідомо";
                     statusEl.style.color = "gray";
                 }
             });
