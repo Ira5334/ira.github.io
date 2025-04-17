@@ -112,9 +112,9 @@ document.getElementById("availability-form").addEventListener("submit", async fu
     const response = await fetch("https://backend-production-a854.up.railway.app/check-availability", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            check_in_date: checkIn,
-            check_out_date: checkOut
+       body: JSON.stringify({
+  check_in_date: checkInDate,
+  check_out_date: checkOutDate,
         })
     });
 
