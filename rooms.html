@@ -101,6 +101,51 @@
     <a href="reviews.html">Відгуки</a>
     <a href="contact.html">Контакти</a>
 </footer>
+    
+<script>
+    document.getElementById('availability-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Отримуємо дати з форми
+        const checkInDate = document.getElementById('check_in').value;
+        const checkOutDate = document.getElementById('check_out').value;
+
+        // Перевірка на наявність дат
+        if (!checkInDate || !checkOutDate) {
+            alert('Будь ласка, введіть дати заїзду та виїзду.');
+            return;
+        }
+
+        // Відправка запиту на сервер
+        fetch('backend-production-a854.up.railway.app', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                check_in: checkInDate,
+                check_out: checkOutDate,
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Обробка відповіді від сервера
+            const rooms = document.querySelectorAll('.room');
+            rooms.forEach(room => {
+                const roomName = room.querySelector('h3').textContent.toLowerCase();
+                const availabilityStatus = room.querySelector('.availability-status');
+
+                // Перевірка на наявність доступних номерів
+                const isAvailable = data.some(roomData => roomData.room_name.toLowerCase() === roomName);
+                availabilityStatus.textContent = isAvailable ? 'Номер доступний' : 'Номер недоступний';
+            });
+        })
+        .catch(error => {
+            console.error('Помилка при запиті:', error);
+            alert('Помилка при перевірці доступності номерів.');
+        });
+    });
+</script>
 
 </body>
 </html>
