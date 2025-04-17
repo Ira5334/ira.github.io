@@ -103,49 +103,46 @@
 </footer>
     
 <script>
-    document.getElementById('availability-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+document.getElementById("availability-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-        // Отримуємо дати з форми
-        const checkInDate = document.getElementById('check_in_date').value;
-        const checkOutDate = document.getElementById('check_out_date').value;
+    const checkIn = document.getElementById("check_in_date").value;
+    const checkOut = document.getElementById("check_out_date").value;
 
-        // Перевірка на наявність дат
-        if (!checkInDate || !checkOutDate) {
-            alert('Будь ласка, введіть дати заїзду та виїзду.');
-            return;
-        }
-
-        // Відправка запиту на сервер
-        fetch('backend-production-a854.up.railway.app/check-availability', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                check_in: checkInDate,
-                check_out: checkOutDate,
-            })
+    const response = await fetch("https://backend-production-a854.up.railway.app/check-availability", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            check_in_date: checkIn,
+            check_out_date: checkOut
         })
-        .then(response => response.json())
-        .then(data => {
-            // Обробка відповіді від сервера
-            const rooms = document.querySelectorAll('.room');
-            rooms.forEach(room => {
-                const roomName = room.querySelector('h3').textContent.toLowerCase();
-                const availabilityStatus = room.querySelector('.availability-status');
-
-                // Перевірка на наявність доступних номерів
-                const isAvailable = data.some(roomData => roomData.room_name.toLowerCase() === roomName);
-                availabilityStatus.textContent = isAvailable ? 'Номер доступний' : 'Номер недоступний';
-            });
-        })
-        .catch(error => {
-            console.error('Помилка при запиті:', error);
-            alert('Помилка при перевірці доступності номерів.');
-        });
     });
+
+    const data = await response.json();
+
+    // Очистити статуси
+    document.querySelectorAll(".availability-status").forEach(el => el.textContent = "");
+
+    if (data.message) {
+        // Немає доступних номерів
+        document.querySelectorAll(".availability-status").forEach(el => {
+            el.textContent = data.message;
+            el.style.color = "red";
+        });
+    } else {
+        // Показати доступні типи номерів
+        data.forEach(room => {
+            const type = room.room_type.toLowerCase();
+            const statusEl = document.querySelector(`.room h3:contains('${type}')`)?.nextElementSibling;
+            if (statusEl) {
+                statusEl.textContent = "Доступний";
+                statusEl.style.color = "green";
+            }
+        });
+    }
+});
 </script>
+
 
 </body>
 </html>
