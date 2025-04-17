@@ -113,8 +113,9 @@ document.getElementById("availability-form").addEventListener("submit", async fu
         method: "POST",
         headers: { "Content-Type": "application/json" },
        body: JSON.stringify({
-  check_in_date: checkInDate,
-  check_out_date: checkOutDate,
+ body: JSON.stringify({
+  check_in_date: checkIn,
+  check_out_date: checkOut
         })
     });
 
