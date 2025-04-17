@@ -29,11 +29,11 @@
 
         <!-- ФОРМА ПЕРЕВІРКИ ДОСТУПНОСТІ -->
         <form id="availability-form">
-            <label for="check_in">Дата заїзду:</label>
-            <input type="date" id="check_in" name="check_in" required>
+            <label for="check_in_date">Дата заїзду:</label>
+            <input type="date" id="check_in_date" name="check_in_date" required>
 
-            <label for="check_out">Дата виїзду:</label>
-            <input type="date" id="check_out" name="check_out" required>
+            <label for="check_out_date">Дата виїзду:</label>
+            <input type="date" id="check_out_date" name="check_out_date" required>
 
             <button type="submit">Перевірити доступність</button>
         </form>
@@ -107,8 +107,8 @@
         event.preventDefault();
 
         // Отримуємо дати з форми
-        const checkInDate = document.getElementById('check_in').value;
-        const checkOutDate = document.getElementById('check_out').value;
+        const checkInDate = document.getElementById('check_in_date').value;
+        const checkOutDate = document.getElementById('check_out_date').value;
 
         // Перевірка на наявність дат
         if (!checkInDate || !checkOutDate) {
