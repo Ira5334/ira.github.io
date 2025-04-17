@@ -101,8 +101,8 @@
     <a href="reviews.html">Відгуки</a>
     <a href="contact.html">Контакти</a>
 </footer>
-    
-<script>
+
+    <script> 
 document.getElementById("availability-form").addEventListener("submit", async function(e) {
     e.preventDefault();
 
@@ -121,7 +121,10 @@ document.getElementById("availability-form").addEventListener("submit", async fu
     const data = await response.json();
 
     // Очистити статуси
-    document.querySelectorAll(".availability-status").forEach(el => el.textContent = "");
+    document.querySelectorAll(".availability-status").forEach(el => {
+        el.textContent = "";
+        el.style.color = "";
+    });
 
     if (data.message) {
         // Немає доступних номерів
@@ -132,17 +135,19 @@ document.getElementById("availability-form").addEventListener("submit", async fu
     } else {
         // Показати доступні типи номерів
         data.forEach(room => {
-            const type = room.room_type.toLowerCase();
-            const statusEl = document.querySelector(`.room h3:contains('${type}')`)?.nextElementSibling;
-            if (statusEl) {
-                statusEl.textContent = "Доступний";
-                statusEl.style.color = "green";
+            const type = room.room_type.toLowerCase(); // наприклад: "standard"
+            const roomBlock = document.querySelector(`.room[data-type="${type}"]`);
+            if (roomBlock) {
+                const statusEl = roomBlock.querySelector(".availability-status");
+                if (statusEl) {
+                    statusEl.textContent = "Доступний";
+                    statusEl.style.color = "green";
+                }
             }
         });
     }
 });
-</script>
-
+</script> 
 
 </body>
 </html>
