@@ -61,35 +61,35 @@
              document.getElementById("price").value = price;
             document.getElementById("total_price").value = price; // Початкове значення загальної вартості
             }
-        if (checkIn) {
-            document.getElementById("check_in").value = checkIn;
-        }
-        if (checkOut) {
-            document.getElementById("check_out").value = checkOut;
-        }
+    if (checkIn) {
+        document.getElementById("check_in").value = checkIn;
+    }
+    if (checkOut) {
+        document.getElementById("check_out").value = checkOut;
+    }
 
-        // Розрахунок загальної вартості
-        function calculateTotalPrice() {
-            const checkInDate = document.getElementById("check_in").value;
-            const checkOutDate = document.getElementById("check_out").value;
+    // Розрахунок загальної вартості на основі кількості днів
+    function calculateTotalPrice() {
+        const checkInDate = document.getElementById("check_in").value;
+        const checkOutDate = document.getElementById("check_out").value;
 
-            if (checkInDate && checkOutDate && !isNaN(price)) {
-                const dateIn = new Date(checkInDate);
-                const dateOut = new Date(checkOutDate);
+        if (checkInDate && checkOutDate && !isNaN(price)) {
+            const dateIn = new Date(checkInDate);
+            const dateOut = new Date(checkOutDate);
 
-                const timeDiff = dateOut - dateIn;
-                const nights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            const timeDiff = dateOut - dateIn;
+            const nights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-                if (nights > 0) {
-                    const totalPrice = nights * price;
-                    document.getElementById("total_price").value = totalPrice;
-                }
+            if (nights > 0) {
+                const totalPrice = nights * price;
+                document.getElementById("total_price").value = totalPrice;
             }
         }
+    }
 
-        // Відстежуємо зміни дат заїзду та виїзду для обчислення ціни
-        document.getElementById("check_in").addEventListener("change", calculateTotalPrice);
-        document.getElementById("check_out").addEventListener("change", calculateTotalPrice);
+    // Обчислюємо загальну вартість при зміні дати заїзду або виїзду
+    document.getElementById("check_in").addEventListener("change", calculateTotalPrice);
+    document.getElementById("check_out").addEventListener("change", calculateTotalPrice)
 
     </script>
 <script>
