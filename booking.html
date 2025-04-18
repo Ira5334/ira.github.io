@@ -61,15 +61,19 @@
              document.getElementById("price").value = price;
             document.getElementById("total_price").value = price; // Початкове значення загальної вартості
             }
-     }
+   }
     if (checkIn) {
         document.getElementById("check_in").value = checkIn;
     }
     if (checkOut) {
         document.getElementById("check_out").value = checkOut;
     }
+    const totalPriceField = document.getElementById("total_price");
+    const nightsInfo = document.createElement("div");
+    nightsInfo.style.marginTop = "5px";
+    nightsInfo.style.color = "#333";
+    totalPriceField.parentNode.insertBefore(nightsInfo, totalPriceField.nextSibling);
 
-    // Функція розрахунку загальної вартості
     function calculateTotalPrice() {
         const checkInDate = document.getElementById("check_in").value;
         const checkOutDate = document.getElementById("check_out").value;
@@ -82,20 +86,24 @@
 
             if (nights > 0) {
                 const totalPrice = nights * price;
-                document.getElementById("total_price").value = totalPrice;
+                totalPriceField.value = totalPrice;
+                nightsInfo.textContent = `Кількість ночей: ${nights}`;
             } else {
-                document.getElementById("total_price").value = 0;
+                totalPriceField.value = 0;
+                nightsInfo.textContent = "❗ Дата виїзду повинна бути пізнішою за дату заїзду.";
+                nightsInfo.style.color = "red";
             }
+        } else {
+            totalPriceField.value = "";
+            nightsInfo.textContent = "";
         }
     }
 
-    // Обчислення після завантаження сторінки, якщо дати є
     window.addEventListener("DOMContentLoaded", calculateTotalPrice);
-
-    // Обчислюємо при зміні дати
     document.getElementById("check_in").addEventListener("change", calculateTotalPrice);
     document.getElementById("check_out").addEventListener("change", calculateTotalPrice);
 </script>
+    
 <script>
 document.querySelector(".booking-form").addEventListener("submit", async (e) => {
     e.preventDefault();
