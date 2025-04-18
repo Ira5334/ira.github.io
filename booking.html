@@ -22,7 +22,7 @@
 
     <main>
         <h2>Оформлення бронювання</h2>
-        <form action="process_booking.php" method="POST" class="booking-form">
+        <form class="booking-form">
             <label for="room_type">Тип номера:</label>
             <input type="text" id="room_type" name="room_type" value="" readonly>
 
@@ -60,6 +60,12 @@
         if (price) {
              document.getElementById("price").value = price;
             document.getElementById("total_price").value = price; // Початкове значення загальної вартості
+            }
+    if (checkIn) {
+        document.getElementById("check_in").value = checkIn;
+    }
+    if (checkOut) {
+        document.getElementById("check_out").value = checkOut;
         }
     </script>
 <script>
@@ -79,7 +85,7 @@ document.querySelector(".booking-form").addEventListener("submit", async (e) => 
     };
 
     try {
-        const res = await fetch("https://backend-production-a854.up.railway.app/book", {
+        const res = await fetch("https://backend-production-a854.up.railway.app/api/book", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
