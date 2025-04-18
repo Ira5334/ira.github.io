@@ -48,19 +48,21 @@
         </form>
     </main>
 
-    <script>
-        // Отримання параметрів з URL
-        const params = new URLSearchParams(window.location.search);
-        const roomType = params.get("room_type");
-        const price = params.get("price");
+  <script>
+    // Отримання параметрів з URL
+    const params = new URLSearchParams(window.location.search);
+    const roomType = params.get("room_type");
+    const price = parseFloat(params.get("price")); // виправлено
+    const checkIn = params.get("check_in"); // додано
+    const checkOut = params.get("check_out"); // додано
 
-       if (roomType) {
-    document.getElementById("room_type").value = roomType;
-        }
-        if (price) {
-             document.getElementById("price").value = price;
-            document.getElementById("total_price").value = price; // Початкове значення загальної вартості
- }
+    if (roomType) {
+        document.getElementById("room_type").value = roomType;
+    }
+    if (!isNaN(price)) {
+        document.getElementById("price").value = price;
+        document.getElementById("total_price").value = price;
+    }
     if (checkIn) {
         document.getElementById("check_in").value = checkIn;
     }
@@ -89,13 +91,15 @@
     }
 
     // Обчислення після завантаження сторінки, якщо дати є
-    window.addEventListener("DOMContentLoaded", calculateTotalPrice);
+    window.addEventListener("DOMContentLoaded", () => {
+        calculateTotalPrice();
 
-    // Обчислюємо при зміні дати
-    document.getElementById("check_in").addEventListener("change", calculateTotalPrice);
-    document.getElementById("check_out").addEventListener("change", calculateTotalPrice);
+        // Прив'язка подій тільки після того як DOM завантажений
+        document.getElementById("check_in").addEventListener("change", calculateTotalPrice);
+        document.getElementById("check_out").addEventListener("change", calculateTotalPrice);
+    });
 </script>
-    
+
 <script>
 document.querySelector(".booking-form").addEventListener("submit", async (e) => {
     e.preventDefault();
