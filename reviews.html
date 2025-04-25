@@ -45,26 +45,20 @@
     
  <hr>
 
-   <div class="container">
-    <h2>НАПИСАТИ ВІДГУК</h2>
-    <form>
-        <div class="form-group">
-            <input type="text" placeholder="Ваше ім'я" required>
-        </div>
-        <div class="form-group">
-            <input type="email" placeholder="Ваш E-mail" required>
-        </div>
-        <div class="form-group full">
-            <input type="text" placeholder="Заголовок (необов'язково)">
-        </div>
-        <div class="form-group full">
-            <textarea placeholder="Напишіть відгук" required></textarea>
-        </div>
-        <div class="form-group full">
-            <button type="submit">НАДІСЛАТИ ВІДГУК</button>
-        </div>
-    </form>
-        <p id="successMessage" style="display: none;">Ваш відгук надіслано! Після перевірки він буде опублікований.</p>
+  <div class="review-container">
+  <h2>Залишити відгук</h2>
+  <hr>
+  <form class="review-form">
+    <div class="review-row">
+      <input type="text" placeholder="Ваше ім’я" required>
+      <input type="email" placeholder="Ваш Email" required>
+    </div>
+    <input type="text" placeholder="Заголовок відгуку" required>
+    <textarea rows="5" placeholder="Напишіть свій відгук тут..." required></textarea>
+    <button type="submit">Надіслати</button>
+  </form>
+</div>
+    
 </main>
 
 <footer>
