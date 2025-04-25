@@ -43,6 +43,27 @@
         <p>Обирали "Апартаменти" для тривалого перебування. Номер обладнаний кухнею, є все необхідне для приготування їжі. Відчували себе як вдома. Територія готелю доглянута, є мангал для шашликів. Рекомендую для тих, хто любить самостійність!</p>
     </div>
     
+ <hr>
+
+    <h2>Залишити відгук</h2>
+    <form id="feedbackForm">
+        <label>Ім’я:<br>
+            <input type="text" id="name" required>
+        </label><br><br>
+
+        <label>Заголовок:<br>
+            <input type="text" id="title" required>
+        </label><br><br>
+
+        <label>Відгук:<br>
+            <textarea id="message" rows="5" required></textarea>
+        </label><br><br>
+
+        <button type="submit">Надіслати відгук</button>
+    </form>
+
+    <p id="successMessage" style="display: none;">Ваш відгук надіслано! Після перевірки він буде опублікований.</p>
+
 </main>
 
 <footer>
@@ -52,5 +73,13 @@
     <a href="contact.html">Контакти</a>
 </footer>
 
+    <script>
+document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('successMessage').style.display = 'block';
+    this.reset();
+});
+</script>
+    
 </body>
 </html>
