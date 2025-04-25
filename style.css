@@ -200,66 +200,73 @@ main {
 }
 
 /* Форма відгуку */
+.review-container {
+  background-color: #f0fdf4; /* світло-зелений */
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.review-container h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #2e7d32;
+  text-transform: uppercase;
+}
+
+.review-container hr {
+  border: none;
+  border-bottom: 3px solid #ffc107; /* жовта лінія */
+  margin-bottom: 20px;
+  width: 100%;
+}
+
 .review-form {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 25px;
-    background-color: #f6fff6;
-    border: 2px solid #388E3C;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.review-form h2 {
-    color: #2e7d32;
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 28px;
+.review-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
-.form-row {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+.review-row input {
+  flex: 1;
 }
 
 .review-form input,
 .review-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 2px solid #81c784;
-    border-radius: 10px;
-    font-size: 1em;
-    background-color: white;
-    transition: border-color 0.3s ease;
-}
-
-.review-form input:focus,
-.review-form textarea:focus {
-    border-color: #388E3C;
-    outline: none;
-}
-
-.review-form .form-row input {
-    width: calc(50% - 10px);
+  padding: 15px;
+  font-size: 16px;
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+  background-color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .review-form button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px;
-    font-size: 1.1em;
-    font-weight: bold;
-    border: none;
-    border-radius: 30px;
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: fit-content;
+  align-self: flex-start;
 }
 
 .review-form button:hover {
-    background-color: #388E3C;
+  background-color: #388e3c;
 }
 
 /* Контейнер для форми */
