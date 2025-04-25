@@ -201,7 +201,7 @@ main {
 
 /* Форма відгуку */
 .review-container {
-  background-color: #f0fdf4; /* світло-зелений */
+  background-color: #f0fdf4;
   padding: 30px;
   max-width: 1000px;
   margin: 0 auto;
@@ -219,7 +219,7 @@ main {
 
 .review-container hr {
   border: none;
-  border-bottom: 3px solid #ffc107; /* жовта лінія */
+  border-bottom: 3px solid #ffc107;
   margin-bottom: 20px;
   width: 100%;
 }
@@ -238,6 +238,7 @@ main {
 
 .review-row input {
   flex: 1;
+  min-width: 200px;
 }
 
 .review-form input,
@@ -249,6 +250,10 @@ main {
   background-color: #ffffff;
   width: 100%;
   box-sizing: border-box;
+}
+
+.review-form textarea {
+  resize: vertical;
 }
 
 .review-form button {
