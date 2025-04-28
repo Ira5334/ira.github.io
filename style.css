@@ -423,3 +423,32 @@ th {
     background-color: #4CAF50;
     color: white;
 }
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .room, .service-box, .promotion-box, .review-text, .service-text, .promotion-text {
+        width: 100%;
+    }
+    .hero-content {
+        padding: 20px;
+        max-width: 95%;
+    }
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+    .swiper {
+        height: 300px;
+    }
+}
+@media (max-width: 480px) {
+    header h1, .hero-content h1 {
+        font-size: 1.8em;
+    }
+    .hero {
+        height: 70vh;
+    }
+    .review-form button, .booking-form button {
+        font-size: 1em;
+    }
+}
