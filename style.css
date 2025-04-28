@@ -151,14 +151,14 @@ main {
 }
 
 .service-text {
-    background-color: #e6f9e6;
+    background-color: #ffffff;
     padding: 20px;
-    border-radius: 10px;
-    border: 2px solid #388E3C;
+    border-radius: 8px;
+    border: 2px solid #a5d6a7;
     margin-top: 20px;
     text-align: left;
     display: inline-block;
-    width: 48%;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -181,14 +181,14 @@ main {
 }
 
 .promotion-text {
-    background-color: #e6f9e6;
+    background-color: #ffffff;
     padding: 20px;
-    border-radius: 10px;
-    border: 2px solid #388E3C;
+    border-radius: 8px;
+    border: 2px solid #a5d6a7;
     margin-top: 20px;
     text-align: left;
     display: inline-block;
-    width: 48%;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -201,14 +201,14 @@ main {
 }
 
 .review-text {
-    background-color: #e6f9e6;
+    background-color: #ffffff;
     padding: 20px;
-    border-radius: 0px;
-    border: 2px solid #388E3C;
+    border-radius: 8px;
+    border: 2px solid #a5d6a7;
     margin-top: 20px;
     text-align: left;
     display: inline-block;
-    width: 48%;
+    width: 100%;
     margin-bottom: 20px;
 }
 
