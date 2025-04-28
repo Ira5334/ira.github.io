@@ -104,8 +104,10 @@ main {
 }
 
 .room img {
-    width: 100%;
+    width: 48%;
     height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
 }
 
 .room h3 {
