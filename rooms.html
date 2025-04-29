@@ -132,10 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await response.json();
 
-      // Очистити статуси
-      document.querySelectorAll(".availability-status").forEach(el => {
-        el.textContent = "";
-        el.style.color = "";
+      // Оновити кнопки бронювання
+      document.querySelectorAll(".book-button").forEach(button => {
+        button.disabled = false;  // Спочатку робимо всі кнопки доступними
       });
 
       if (data.message) {
@@ -144,6 +143,11 @@ document.addEventListener("DOMContentLoaded", () => {
           el.textContent = data.message;
           el.style.color = "red";
         });
+
+        // Вимикаємо кнопки бронювання для всіх номерів
+        document.querySelectorAll(".book-button").forEach(button => {
+          button.disabled = true;
+        });
       } else {
         // Показати доступні типи номерів
         data.forEach(room => {
@@ -151,9 +155,15 @@ document.addEventListener("DOMContentLoaded", () => {
           const roomBlock = document.querySelector(`.room[data-type="${type}"]`);
           if (roomBlock) {
             const statusEl = roomBlock.querySelector(".availability-status");
+            const button = roomBlock.querySelector(".book-button");
+
             if (statusEl) {
               statusEl.textContent = "Доступний";
               statusEl.style.color = "green";
+            }
+
+            if (button) {
+              button.disabled = false;  // Якщо номер доступний, кнопка активна
             }
           }
         });
