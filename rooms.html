@@ -47,7 +47,7 @@
             <img src="https://karpatykruiz.com.ua/assets/cache/images/shidnytsia/complexes/osonnia/Osonnya_ekonom_305_04-740x620.jpg" alt="Номер Економ 2">
             <p> Однокімнатний номер площею 16 м² на 2, 3 та 4 поверсі. Додаткове місце не передбачене. Загальна кількість номерів – 9 (№205, №209, №210, №305, №309, №310, №405, №409, №410). У кожному номері є балкон зі столиком та стільцями.</p>
             <p><strong>У номері:</strong> двоспальне ліжко, телевізор, чайник, холодильник, посуд, санвузол - душова кабіна, умивальник, фен, сушка для рушників, халат, тапочки, набір косметики.</p>
-            <a href="booking.html?room_type=ekonom&price=800" class="book-button" disabled>Забронювати</a>
+            <a href="booking.html?room_type=ekonom&price=800" class="book-button">Забронювати</a>
         </div>
 
         <div class="room">
@@ -57,7 +57,7 @@
             <img src="https://karpatykruiz.com.ua/assets/cache/images/shidnytsia/complexes/osonnia/Osonnya_standart-v-SPA-k_307_03-740x620.jpg" alt="Стандарт-номер1"> 
             <p>Однокімнатний номер площею 20 м² на 2,3 та 4 поверсі. Можливе надання додаткового місця. Загальна кількість номерів – 6 (№204, №207, №304, №307, №404, №407). У кожному номері є балкон зі столиком та стільцями.</p>
             <p><strong>Ціна: 1200 грн/ніч</strong></p>
-           <a href="booking.html?room_type=standart&price=1200" class="book-button" disabled>Забронювати</a>
+           <a href="booking.html?room_type=standart&price=1200" class="book-button">Забронювати</a>
         </div>
 
         <div class="room">
@@ -67,7 +67,7 @@
             <img src="https://karpatykruiz.com.ua/assets/cache/images/shidnytsia/complexes/osonnia/Osonnya_lux-panor-v-SPA-k_501_02-740x620.jpg" alt="Люкс1">
             <p>Трикімнатний номер площею 50 м² на 5 поверсі з видом на річку, гори, озеро та ліс. Складається з двох окремих спалень та вітальні. У номері є балкон зі столиком та стільцями.</p>
             <p><strong>Ціна: 2500 грн/ніч</strong></p>
-            <a href="booking.html?room_type=lux&price=2500" class="book-button" disabled>Забронювати</a>
+           <a href="booking.html?room_type=lux&price=2500" class="book-button">Забронювати</a>
         </div>
 
         <div class="room">
@@ -77,7 +77,7 @@
             <img src="https://karpatykruiz.com.ua/assets/cache/images/shidnytsia/complexes/osonnia/Osonnya_kotedz_2%2B3_4001_03-740x620.jpg" alt="Сімейний номер1">
             <p>Номер для всієї родини з двома спальнями та простором для відпочинку дітей і дорослих. У номері: двоспальне ліжко, розкладний двоспальний диван, односпальне крісло розкладне, шафа, міні-кухня: чайник, мікрохвильова піч, холодильник, посуд; санвузол – душова кабіна, умивальник, фен, сушка для рушників, халат, тапочки, набір косметики.</p>
             <p><strong>Ціна: 2000 грн/ніч</strong></p>
-            <a href="booking.html?room_type=simeynyy&price=2000" class="book-button" disabled>Забронювати</a>
+           <a href="booking.html?room_type=simeynyy&price=2000" class="book-button">Забронювати</a>
         </div>
 
         <div class="room">
@@ -87,7 +87,7 @@
             <img src="https://karpatykruiz.com.ua/assets/cache/images/shidnytsia/complexes/osonnia/Osonnya_apart_lux_5005_03-740x620.jpg" alt="Апартаменти1">
             <p>Двокімнатний номер з міні-кухнею площею 50 м² розташований у котеджному будиночку, збудованому повністю з натурального дерева. Є можливість розміщення на додатковому місці. Загальна кількість номерів – 3 (№117 – на 4 поверсі, №5005 та №5007 на 2 поверсі).</p>
             <p><strong>Ціна: 3500 грн/ніч</strong></p>
-            <a href="booking.html?room_type=apartaments&price=3500" class="book-button" disabled>Забронювати</a>
+           <a href="booking.html?room_type=apartaments&price=3500" class="book-button">Забронювати</a>
         </div>
     </section>
 </main>
@@ -132,9 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await response.json();
 
-      // Оновити кнопки бронювання
-      document.querySelectorAll(".book-button").forEach(button => {
-        button.disabled = false;  // Спочатку робимо всі кнопки доступними
+      // Очистити статуси
+      document.querySelectorAll(".availability-status").forEach(el => {
+        el.textContent = "";
+        el.style.color = "";
       });
 
       if (data.message) {
@@ -143,27 +144,16 @@ document.addEventListener("DOMContentLoaded", () => {
           el.textContent = data.message;
           el.style.color = "red";
         });
-
-        // Вимикаємо кнопки бронювання для всіх номерів
-        document.querySelectorAll(".book-button").forEach(button => {
-          button.disabled = true;
-        });
       } else {
         // Показати доступні типи номерів
         data.forEach(room => {
           const type = room.room_type.toLowerCase();
-          const roomBlock = document.querySelector(`.room[data-type="${type}"]`);
+          const roomBlock = document.querySelector(.room[data-type="${type}"]);
           if (roomBlock) {
             const statusEl = roomBlock.querySelector(".availability-status");
-            const button = roomBlock.querySelector(".book-button");
-
             if (statusEl) {
               statusEl.textContent = "Доступний";
               statusEl.style.color = "green";
-            }
-
-            if (button) {
-              button.disabled = false;  // Якщо номер доступний, кнопка активна
             }
           }
         });
