@@ -20,62 +20,64 @@
     </nav>
 </header>
 
-<main>
-  <section class="user-info">
-    <h2>Особисті дані</h2>
-   <div id="user-info">
-  <p>Ім'я: <span id="first-name"></span></p>
-  <p>Прізвище: <span id="last-name"></span></p>
-  <p>Телефон: <span id="phone-number"></span></p>
-  <button onclick="enableEdit()">Редагувати</button>
-</div>
+ <main>
+    <div class="profile-container">
+      <section class="user-info">
+        <h2>Особисті дані</h2>
+        <div id="user-info">
+          <p>Ім'я: <span id="first-name"></span></p>
+          <p>Прізвище: <span id="last-name"></span></p>
+          <p>Телефон: <span id="phone-number"></span></p>
+          <button class="edit-button" onclick="enableEdit()">Редагувати</button>
+        </div>
 
-<form id="user-form" style="display:none;">
-  <label>Ім'я: <input type="text" id="first_name" name="first_name" /></label><br />
-  <label>Прізвище: <input type="text" id="last_name" name="last_name" /></label><br />
-  <label>Телефон: <input type="text" id="phone" name="phone" /></label><br />
-  <button type="submit">Змінити</button>
-</form>
-  </section>
+        <form id="user-form" style="display:none;">
+          <label>Ім'я: <input type="text" id="first_name" name="first_name" /></label>
+          <label>Прізвище: <input type="text" id="last_name" name="last_name" /></label>
+          <label>Телефон: <input type="text" id="phone" name="phone" /></label>
+          <button type="submit">Змінити</button>
+        </form>
+      </section>
 
-  <section class="history">
-    <h2>Історія бронювань</h2>
-    <ul id="reservations-list"></ul>
-  </section>
+      <section class="history">
+        <h2>Історія бронювань</h2>
+        <ul id="reservations-list"></ul>
+      </section>
 
-  <section class="services">
-    <h2 id="services-toggle">Замовлення послуг ▼</h2>
-    <div id="services-menu" style="display: none;">
-      <details>
-        <summary>Їжа в номер</summary>
-        <label><input type="checkbox" data-price="150" /> Борщ - 150 грн</label>
-        <label><input type="checkbox" data-price="120" /> Вареники - 120 грн</label>
-      </details>
+      <section class="services">
+        <h2 id="services-toggle">Замовлення послуг ▼</h2>
+        <div id="services-menu" style="display: none;">
+          <details>
+            <summary>Їжа в номер</summary>
+            <label><input type="checkbox" data-price="150" /> Борщ - 150 грн</label><br />
+            <label><input type="checkbox" data-price="120" /> Вареники - 120 грн</label>
+          </details>
 
-      <details>
-        <summary>Спа-процедури</summary>
-        <label><input type="checkbox" data-price="500" /> Масаж спини - 500 грн</label>
-      </details>
+          <details>
+            <summary>Спа-процедури</summary>
+            <label><input type="checkbox" data-price="500" /> Масаж спини - 500 грн</label>
+          </details>
 
-      <details>
-        <summary>Хімчистка</summary>
-        <label><input type="checkbox" data-price="300" /> Костюм - 300 грн</label>
-      </details>
+          <details>
+            <summary>Хімчистка</summary>
+            <label><input type="checkbox" data-price="300" /> Костюм - 300 грн</label>
+          </details>
 
-      <details>
-        <summary>Прибирання</summary>
-        <label><input type="checkbox" data-price="200" /> Прибирання номера - 200 грн</label>
-      </details>
+          <details>
+            <summary>Прибирання</summary>
+            <label><input type="checkbox" data-price="200" /> Прибирання номера - 200 грн</label>
+          </details>
 
-      <label for="comments">Коментар до замовлення:</label>
-      <textarea id="comments"></textarea>
+          <label for="comments">Коментар до замовлення:</label>
+          <textarea id="comments"></textarea>
 
-      <p><strong>Сума: <span id="total">0</span> грн</strong></p>
-      <button id="submit-order">Оформити замовлення</button>
-      <p id="order-status"></p>
+          <p><strong>Сума: <span id="total">0</span> грн</strong></p>
+          <button id="submit-order">Оформити замовлення</button>
+          <p id="order-status"></p>
+        </div>
+      </section>
     </div>
-  </section>
-</main>
+  </main>
 
 <script>
   const API_BASE = 'https://backend-production-a854.up.railway.app';
