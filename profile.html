@@ -98,7 +98,7 @@ document.getElementById('phone-number').textContent = data.phone_number;
       .catch(error => console.log("Error loading user data:", error));
 
     // Завантаження історії бронювань
-   fetch(`${API_BASE}/api/reservations/${userEmail}`)
+  fetch(`${API_BASE}/api/reservations/email/${encodeURIComponent(userEmail)}`)
       .then(res => res.json())
       .then(data => {
         const list = document.getElementById('reservations-list');
@@ -148,35 +148,7 @@ document.getElementById('phone-number').textContent = data.phone_number;
     });
 
     // Оформлення замовлення
-  document.getElementById('submit-order').addEventListener('click', () => {
-  const selected = [];
-  document.querySelectorAll('input[type=checkbox]:checked').forEach(c => {
-    selected.push({
-      name: c.parentElement.textContent.trim(),
-      price: parseInt(c.dataset.price)
-    });
-  });
-
-  const order = {
-    email: userEmail,
-    items: selected,
-    comment: document.getElementById('comments').value
-  };
-
-  fetch(`${API_BASE}/api/orders`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(order)
-  })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('order-status').textContent = data.message || 'Замовлення прийнято!';
-    })
-    .catch(err => {
-      console.error(err);
-      document.getElementById('order-status').textContent = 'Помилка під час оформлення.';
-    });
-});
+  
 // Функції редагування
  function enableEdit() {
   document.getElementById('user-form').style.display = 'block';
