@@ -98,7 +98,7 @@
       .catch(error => console.log("Error loading user data:", error));
 
     // Завантаження історії бронювань
-    fetch(`${API_BASE}/api/reservations/email/${encodeURIComponent(userEmail)}`)
+   fetch(`${API_BASE}/api/reservations/user/${userEmail}`)
       .then(res => res.json())
       .then(data => {
         const list = document.getElementById('reservations-list');
@@ -130,13 +130,13 @@
       .catch(error => console.log("Error saving user data:", error));
     });
 
-    // Меню послуг: показати/сховати
+    // Управління меню послуг
     document.getElementById('services-toggle').addEventListener('click', () => {
       const menu = document.getElementById('services-menu');
       menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
     });
 
-    // Підрахунок суми послуг
+    // Підрахунок суми замовлення послуг
     document.querySelectorAll('input[type=checkbox]').forEach(box => {
       box.addEventListener('change', () => {
         let total = 0;
@@ -147,7 +147,7 @@
       });
     });
 
-    // Оформлення замовлення (поки лише повідомлення)
+    // Оформлення замовлення
     document.getElementById('submit-order').addEventListener('click', () => {
       document.getElementById('order-status').textContent = 'Очікуйте на підтвердження замовлення...';
     });
