@@ -72,7 +72,7 @@
 
 <script>
   const API_BASE = 'https://backend-production-a854.up.railway.app';
-  const userId = 1; // Замінити на фактичний ID після входу
+ const userId = localStorage.getItem('userId');
 
   document.addEventListener('DOMContentLoaded', () => {
     fetch(`${API_BASE}/api/user/${userId}`)
