@@ -57,7 +57,7 @@
         return res.json();
       })
       .then(data => {
-        localStorage.setItem('userEmail', user.email); 
+        localStorage.setItem('userEmail', data.email); 
         window.location.href = 'profile.html'; // Перехід в кабінет
       })
       .catch(err => {
