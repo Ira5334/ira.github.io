@@ -87,8 +87,7 @@
         // Заповнюємо поля форми даними користувача
         document.getElementById('first_name').value = data.first_name;
         document.getElementById('last_name').value = data.last_name;
-        document.getElementById('phone_number').value = data.phone_number;
-        document.getElementById('email').value = data.email;
+        document.getElementById('phone').value = data.phone_number;
       })
       .catch(error => console.log("Error loading user data:", error));
 
