@@ -91,9 +91,9 @@
     fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`)
       .then(res => res.json())
       .then(data => {
-        document.getElementById('first_name').value = data.first_name;
-        document.getElementById('last_name').value = data.last_name;
-        document.getElementById('phone').value = data.phone_number;
+document.getElementById('first-name').textContent = data.first_name;
+document.getElementById('last-name').textContent = data.last_name;
+document.getElementById('phone-number').textContent = data.phone_number;
       })
       .catch(error => console.log("Error loading user data:", error));
 
@@ -148,8 +148,70 @@
     });
 
     // Оформлення замовлення
-    document.getElementById('submit-order').addEventListener('click', () => {
-      document.getElementById('order-status').textContent = 'Очікуйте на підтвердження замовлення...';
+  document.getElementById('submit-order').addEventListener('click', () => {
+  const selected = [];
+  document.querySelectorAll('input[type=checkbox]:checked').forEach(c => {
+    selected.push({
+      name: c.parentElement.textContent.trim(),
+      price: parseInt(c.dataset.price)
+    });
+  });
+
+  const order = {
+    email: userEmail,
+    items: selected,
+    comment: document.getElementById('comments').value
+  };
+
+  fetch(`${API_BASE}/api/orders`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order)
+  })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('order-status').textContent = data.message || 'Замовлення прийнято!';
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById('order-status').textContent = 'Помилка під час оформлення.';
+    });
+});
+// Функції редагування
+  function enableEdit() {
+    document.getElementById('edit-form').style.display = 'block';
+    document.getElementById('user-info').style.display = 'none';
+
+    document.getElementById('edit-first-name').value = document.getElementById('first-name').textContent;
+    document.getElementById('edit-last-name').value = document.getElementById('last-name').textContent;
+    document.getElementById('edit-phone-number').value = document.getElementById('phone-number').textContent;
+  }
+
+  function submitChanges() {
+    fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: userEmail,
+        first_name: document.getElementById('edit-first-name').value,
+        last_name: document.getElementById('edit-last-name').value,
+        phone_number: document.getElementById('edit-phone-number').value
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message || 'Зміни збережено!');
+      location.reload();
+    })
+    .catch(error => {
+      console.log("Помилка під час збереження:", error);
+      alert('Не вдалося зберегти зміни');
+    });
+  }
+</script>
+
+</body>
+</html>
     });
   });
 </script>
