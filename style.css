@@ -358,20 +358,20 @@ main {
 }
 
 /* Таблиця історії бронювань */
-.booking-history-table {
+.reservations-list-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.booking-history-table th,
-.booking-history-table td {
+.reservations-list-table th,
+.reservations-list-table td {
     border: 2px solid #388E3C;
     padding: 12px;
     text-align: left;
 }
 
-.booking-history-table th {
+.reservations-list-table th {
     background-color: #4CAF50;
     color: white;
 }
