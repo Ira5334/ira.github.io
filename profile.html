@@ -79,7 +79,17 @@
 
 <script>
   const API_BASE = 'https://backend-production-a854.up.railway.app';
-  const userEmail = localStorage.getItem('userEmail'); // Отримуємо email замість userId
+  const userEmail = localStorage.getItem('userEmail'); 
+  // Функція перемикання на режим редагування
+  function enableEdit() {
+    document.getElementById('user-info').style.display = 'none';
+    document.getElementById('user-form').style.display = 'block';
+
+    // Заповнення форми поточними значеннями
+    document.getElementById('first_name').value = document.getElementById('first-name').textContent;
+    document.getElementById('last_name').value = document.getElementById('last-name').textContent;
+    document.getElementById('phone').value = document.getElementById('phone-number').textContent;
+  }
 
   document.addEventListener('DOMContentLoaded', () => {
     if (!userEmail) {
@@ -110,7 +120,7 @@ document.getElementById('phone-number').textContent = data.phone_number;
       })
       .catch(error => console.log("Error loading reservations:", error));
 
-    // Збереження змін користувача
+     // Обробка збереження форми
     document.getElementById('user-form').addEventListener('submit', e => {
       e.preventDefault();
       fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`, {
@@ -126,11 +136,18 @@ document.getElementById('phone-number').textContent = data.phone_number;
       .then(res => res.json())
       .then(data => {
         alert(data.message || 'Зміни збережено!');
+
+        // Оновлення відображених даних
+        document.getElementById('first-name').textContent = document.getElementById('first_name').value;
+        document.getElementById('last-name').textContent = document.getElementById('last_name').value;
+        document.getElementById('phone-number').textContent = document.getElementById('phone').value;
+
+        // Перемикання назад
+        document.getElementById('user-form').style.display = 'none';
+        document.getElementById('user-info').style.display = 'block';
       })
       .catch(error => console.log("Error saving user data:", error));
     });
-
-
     // Оформлення замовлення
    document.getElementById('services-toggle').addEventListener('click', () => {
       const menu = document.getElementById('services-menu');
