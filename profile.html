@@ -108,17 +108,33 @@ document.getElementById('phone-number').textContent = data.phone_number;
       .catch(error => console.log("Error loading user data:", error));
 
     // Завантаження історії бронювань
-  fetch(`${API_BASE}/api/reservations/email/${encodeURIComponent(userEmail)}`)
-      .then(res => res.json())
-      .then(data => {
-        const list = document.getElementById('reservations-list');
-        data.forEach(r => {
-          const li = document.createElement('li');
-          li.textContent = `${r.room_type}, ${r.check_in_date} - ${r.check_out_date} [${r.status}]`;
-          list.appendChild(li);
-        });
-      })
-      .catch(error => console.log("Error loading reservations:", error));
+fetch(`${API_BASE}/api/reservations/email/${encodeURIComponent(userEmail)}`)
+  .then(res => res.json())
+  .then(data => {
+    const list = document.getElementById('reservations-list');
+    
+    if (!list) {
+      console.error("❌ Елемент з ID 'reservations-list' не знайдено в DOM!");
+      return;
+    }
+
+    if (!Array.isArray(data) || data.length === 0) {
+      list.innerHTML = '<li>Немає бронювань</li>';
+      return;
+    }
+
+    data.forEach(r => {
+      const li = document.createElement('li');
+      const checkIn = new Date(r.check_in_date).toLocaleDateString('uk-UA');
+      const checkOut = new Date(r.check_out_date).toLocaleDateString('uk-UA');
+      li.textContent = `${r.room_type}, ${checkIn} - ${checkOut} [${r.status}]`;
+      list.appendChild(li);
+    });
+  })
+  .catch(error => {
+    console.error("❌ Помилка завантаження бронювань:", error);
+  });
+
 
      // Обробка збереження форми
     document.getElementById('user-form').addEventListener('submit', e => {
