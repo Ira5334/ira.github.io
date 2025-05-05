@@ -1,39 +1,186 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вхід</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Вхід</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Вхід до Особистого Кабінету</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Головна</a></li>
-                <li><a href="rooms.html">Номери і ціни</a></li>
-                <li><a href="services.html">Послуги</a></li>
-                <li><a href="promotions.html">Акції та події</a></li>
-                <li><a href="login.html">Вхід</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Готель "ГОРИЗОНТ"</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Головна</a></li>
+        <li><a href="rooms.html">Номери</a></li>
+        <li><a href="services.html">Послуги</a></li>
+        <li><a href="promotions.html">Акції та події</a></li>
+        <li><a href="contact.html">Контакти</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <form action="user_dashboard.html" method="post">
-            <label for="email">Електронна пошта</label>
-            <input type="email" id="email" name="email" required>
+  <main>
+    <!-- Форма входу -->
+    <section id="login-section">
+      <h2>Вхід до Особистого Кабінету</h2>
+      <form id="login-form">
+        <label for="email">Електронна пошта</label>
+        <input type="email" id="email" name="email" required />
 
-            <label for="password">Пароль</label>
-            <input type="password" id="password" name="password" required>
+        <label for="password">Пароль</label>
+        <input type="password" id="password" name="password" required />
 
-            <button type="submit">Увійти</button>
+        <button type="submit">Увійти</button>
+        <p id="login-error" style="color: red;"></p>
+      </form>
+    </section>
+
+    <!-- Особистий кабінет -->
+    <section id="account-section" style="display: none;">
+      <section class="user-info">
+        <h2>Особисті дані</h2>
+        <form id="user-form">
+          <label>Ім'я: <input type="text" id="first_name" /></label>
+          <label>Прізвище: <input type="text" id="last_name" /></label>
+          <label>Телефон: <input type="text" id="phone" /></label>
+          <button type="submit">Зберегти зміни</button>
         </form>
-    </main>
+      </section>
 
-    <footer>
-        <p>&copy; 2025 Готель. Всі права захищені.</p>
-    </footer>
+      <section class="history">
+        <h2>Історія бронювань</h2>
+        <ul id="reservations-list"></ul>
+      </section>
+
+      <section class="services">
+        <h2 id="services-toggle">Замовлення послуг ▼</h2>
+        <div id="services-menu" style="display: none;">
+          <details>
+            <summary>Їжа в номер</summary>
+            <label><input type="checkbox" data-price="150" /> Борщ - 150 грн</label>
+            <label><input type="checkbox" data-price="120" /> Вареники - 120 грн</label>
+          </details>
+          <details>
+            <summary>Спа-процедури</summary>
+            <label><input type="checkbox" data-price="500" /> Масаж спини - 500 грн</label>
+          </details>
+          <details>
+            <summary>Хімчистка</summary>
+            <label><input type="checkbox" data-price="300" /> Костюм - 300 грн</label>
+          </details>
+          <details>
+            <summary>Прибирання</summary>
+            <label><input type="checkbox" data-price="200" /> Прибирання номера - 200 грн</label>
+          </details>
+
+          <label for="comments">Коментар до замовлення:</label>
+          <textarea id="comments"></textarea>
+
+          <p><strong>Сума: <span id="total">0</span> грн</strong></p>
+          <button id="submit-order">Оформити замовлення</button>
+          <p id="order-status"></p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Готель. Всі права захищені.</p>
+  </footer>
+
+  <script>
+    const API_BASE = 'https://backend-production-a854.up.railway.app';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('login-form');
+      const loginSection = document.getElementById('login-section');
+      const accountSection = document.getElementById('account-section');
+      const loginError = document.getElementById('login-error');
+
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await res.json();
+          if (res.ok) {
+            loginSection.style.display = 'none';
+            accountSection.style.display = 'block';
+            loadAccount(data.customer_id);
+          } else {
+            loginError.textContent = data.message || 'Невірні дані';
+          }
+        } catch (err) {
+          loginError.textContent = 'Помилка з’єднання з сервером.';
+        }
+      });
+
+      function loadAccount(userId) {
+        fetch(`${API_BASE}/api/user/${userId}`)
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById('first_name').value = data.first_name;
+            document.getElementById('last_name').value = data.last_name;
+            document.getElementById('phone').value = data.phone;
+          });
+
+        fetch(`${API_BASE}/api/reservations/user/${userId}`)
+          .then(res => res.json())
+          .then(data => {
+            const list = document.getElementById('reservations-list');
+            list.innerHTML = '';
+            data.forEach(r => {
+              const li = document.createElement('li');
+              li.textContent = `${r.room_type}, ${r.check_in_date} - ${r.check_out_date} [${r.status}]`;
+              list.appendChild(li);
+            });
+          });
+
+        document.getElementById('user-form').addEventListener('submit', e => {
+          e.preventDefault();
+          fetch(`${API_BASE}/api/user/${userId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              first_name: document.getElementById('first_name').value,
+              last_name: document.getElementById('last_name').value,
+              phone: document.getElementById('phone').value
+            })
+          })
+            .then(res => res.json())
+            .then(data => alert(data.message));
+        });
+
+        document.getElementById('services-toggle').addEventListener('click', () => {
+          const menu = document.getElementById('services-menu');
+          menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        });
+
+        document.querySelectorAll('input[type=checkbox]').forEach(box => {
+          box.addEventListener('change', () => {
+            let total = 0;
+            document.querySelectorAll('input[type=checkbox]:checked').forEach(c => {
+              total += parseInt(c.dataset.price);
+            });
+            document.getElementById('total').textContent = total;
+          });
+        });
+
+        document.getElementById('submit-order').addEventListener('click', () => {
+          document.getElementById('order-status').textContent = 'Очікуйте на підтвердження замовлення...';
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
