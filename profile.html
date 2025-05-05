@@ -80,92 +80,74 @@
   </main>
 
 <script>
-  const API_BASE = 'https://backend-production-a854.up.railway.app';
-  const userEmail = localStorage.getItem('userEmail'); 
-  // Функція перемикання на режим редагування
-  function enableEdit() {
-    document.getElementById('user-info').style.display = 'none';
-    document.getElementById('user-form').style.display = 'block';
+ const API_BASE = 'https://backend-production-a854.up.railway.app';
 
-    // Заповнення форми поточними значеннями
-    document.getElementById('first_name').value = document.getElementById('first-name').textContent;
-    document.getElementById('last_name').value = document.getElementById('last-name').textContent;
-    document.getElementById('phone').value = document.getElementById('phone-number').textContent;
-  }
+// Отримання email користувача з localStorage
+let userEmail = localStorage.getItem('userEmail');
 
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!userEmail) {
-      // Якщо email не збережено, редірект на сторінку входу
-      window.location.href = 'login.html';
-    }
+// Якщо email немає в localStorage, редірект на сторінку входу
+if (!userEmail) {
+  window.location.href = 'login.html';
+}
 
-    // Завантаження даних користувача
-    fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`)
-      .then(res => res.json())
-      .then(data => {
-document.getElementById('first-name').textContent = data.first_name;
-document.getElementById('last-name').textContent = data.last_name;
-document.getElementById('phone-number').textContent = data.phone_number;
-      })
-      .catch(error => console.log("Error loading user data:", error));
-
-    // Завантаження історії бронювань
-fetch(`${API_BASE}/api/reservations/email/${encodeURIComponent(userEmail)}`)
+// Завантаження даних користувача
+fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`)
   .then(res => res.json())
   .then(data => {
-    const list = document.getElementById('reservations-list');
-    
-    if (!list) {
-      console.error("❌ Елемент з ID 'reservations-list' не знайдено в DOM!");
+    if (!data || !data.first_name) {
+      console.error("❌ Дані користувача не знайдено!");
       return;
     }
 
-    if (!Array.isArray(data) || data.length === 0) {
-      list.innerHTML = '<li>Немає бронювань</li>';
-      return;
-    }
-
-    data.forEach(r => {
-      const li = document.createElement('li');
-      const checkIn = new Date(r.check_in_date).toLocaleDateString('uk-UA');
-      const checkOut = new Date(r.check_out_date).toLocaleDateString('uk-UA');
-      li.textContent = `${r.room_type}, ${checkIn} - ${checkOut} [${r.status}]`;
-      list.appendChild(li);
-    });
+    document.getElementById('first-name').textContent = data.first_name;
+    document.getElementById('last-name').textContent = data.last_name;
+    document.getElementById('phone-number').textContent = data.phone_number;
   })
-  .catch(error => {
-    console.error("❌ Помилка завантаження бронювань:", error);
-  });
+  .catch(error => console.error("❌ Помилка завантаження даних:", error));
 
+// Функція перемикання на режим редагування
+function enableEdit() {
+  document.getElementById('user-info').style.display = 'none';
+  document.getElementById('user-form').style.display = 'block';
 
-     // Обробка збереження форми
-    document.getElementById('user-form').addEventListener('submit', e => {
-      e.preventDefault();
-      fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: userEmail,
-          first_name: document.getElementById('first_name').value,
-          last_name: document.getElementById('last_name').value,
-          phone_number: document.getElementById('phone').value
-        })
-      })
-      .then(res => res.json())
-      .then(data => {
-        alert(data.message || 'Зміни збережено!');
+  // Заповнення форми поточними значеннями
+  document.getElementById('first_name').value = document.getElementById('first-name').textContent;
+  document.getElementById('last_name').value = document.getElementById('last-name').textContent;
+  document.getElementById('phone').value = document.getElementById('phone-number').textContent;
+}
 
-        // Оновлення відображених даних
-        document.getElementById('first-name').textContent = document.getElementById('first_name').value;
-        document.getElementById('last-name').textContent = document.getElementById('last_name').value;
-        document.getElementById('phone-number').textContent = document.getElementById('phone').value;
+// Обробка збереження форми
+document.getElementById('user-form').addEventListener('submit', e => {
+  e.preventDefault();
 
-        // Перемикання назад
-        document.getElementById('user-form').style.display = 'none';
-        document.getElementById('user-info').style.display = 'block';
-      })
-      .catch(error => console.log("Error saving user data:", error));
-    });
+  const updatedData = {
+    email: userEmail,
+    first_name: document.getElementById('first_name').value,
+    last_name: document.getElementById('last_name').value,
+    phone_number: document.getElementById('phone').value
+  };
+
+  fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message || 'Зміни збережено!');
+
+    // Оновлення відображених даних
+    document.getElementById('first-name').textContent = updatedData.first_name;
+    document.getElementById('last-name').textContent = updatedData.last_name;
+    document.getElementById('phone-number').textContent = updatedData.phone_number;
+
+    // Перемикання назад
+    document.getElementById('user-form').style.display = 'none';
+    document.getElementById('user-info').style.display = 'block';
+  })
+  .catch(error => console.error("❌ Помилка збереження даних:", error));
+});
+
     // Оформлення замовлення
    document.getElementById('services-toggle').addEventListener('click', () => {
       const menu = document.getElementById('services-menu');
