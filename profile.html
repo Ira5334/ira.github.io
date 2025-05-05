@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Особистий кабінет</title>
+  <link rel="stylesheet" href="account.css">
+</head>
+<body>
+  <header>
+    <h1>Особистий кабінет</h1>
+  </header>
+
+  <main>
+    <section class="user-info">
+      <h2>Особисті дані</h2>
+      <form id="user-form">
+        <label>Ім'я:<input type="text" id="first_name" /></label>
+        <label>Прізвище:<input type="text" id="last_name" /></label>
+        <label>Телефон:<input type="text" id="phone" /></label>
+        <button type="submit">Зберегти зміни</button>
+      </form>
+    </section>
+
+    <section class="history">
+      <h2>Історія бронювань</h2>
+      <ul id="reservations-list"></ul>
+    </section>
+
+    <section class="services">
+      <h2 id="services-toggle">Замовлення послуг ▼</h2>
+      <div id="services-menu" style="display: none;">
+        <details>
+          <summary>Їжа в номер</summary>
+          <label><input type="checkbox" data-price="150" /> Борщ - 150 грн</label>
+          <label><input type="checkbox" data-price="120" /> Вареники - 120 грн</label>
+        </details>
+
+        <details>
+          <summary>Спа-процедури</summary>
+          <label><input type="checkbox" data-price="500" /> Масаж спини - 500 грн</label>
+        </details>
+
+        <details>
+          <summary>Хімчистка</summary>
+          <label><input type="checkbox" data-price="300" /> Костюм - 300 грн</label>
+        </details>
+
+        <details>
+          <summary>Прибирання</summary>
+          <label><input type="checkbox" data-price="200" /> Прибирання номера - 200 грн</label>
+        </details>
+
+        <label for="comments">Коментар до замовлення:</label>
+        <textarea id="comments"></textarea>
+
+        <p><strong>Сума: <span id="total">0</span> грн</strong></p>
+        <button id="submit-order">Оформити замовлення</button>
+        <p id="order-status"></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const userId = 1; // тимчасово, замінити на отриманий ID після авторизації
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch(`/api/user/${userId}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('first_name').value = data.first_name;
+          document.getElementById('last_name').value = data.last_name;
+          document.getElementById('phone').value = data.phone;
+        });
+
+      fetch(`/api/reservations/user/${userId}`)
+        .then(res => res.json())
+        .then(data => {
+          const list = document.getElementById('reservations-list');
+          data.forEach(r => {
+            const li = document.createElement('li');
+            li.textContent = `${r.room_type}, ${r.check_in_date} - ${r.check_out_date} [${r.status}]`;
+            list.appendChild(li);
+          });
+        });
+
+      document.getElementById('user-form').addEventListener('submit', e => {
+        e.preventDefault();
+        fetch(`/api/user/${userId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            first_name: document.getElementById('first_name').value,
+            last_name: document.getElementById('last_name').value,
+            phone: document.getElementById('phone').value
+          })
+        }).then(res => res.json()).then(data => alert(data.message));
+      });
+
+      document.getElementById('services-toggle').addEventListener('click', () => {
+        const menu = document.getElementById('services-menu');
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+      });
+
+      document.querySelectorAll('input[type=checkbox]').forEach(box => {
+        box.addEventListener('change', () => {
+          let total = 0;
+          document.querySelectorAll('input[type=checkbox]:checked').forEach(c => {
+            total += parseInt(c.dataset.price);
+          });
+          document.getElementById('total').textContent = total;
+        });
+      });
+
+      document.getElementById('submit-order').addEventListener('click', () => {
+        document.getElementById('order-status').textContent = 'Очікуйте на підтвердження замовлення...';
+      });
+    });
+  </script>
+</body>
+</html>
