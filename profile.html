@@ -72,17 +72,26 @@
 
 <script>
   const API_BASE = 'https://backend-production-a854.up.railway.app';
- const userId = localStorage.getItem('userId');
+  const userId = localStorage.getItem('userId'); // Отримуємо userId із localStorage
 
   document.addEventListener('DOMContentLoaded', () => {
+    if (!userId) {
+      // Якщо userId не збережено, редірект на сторінку входу
+      window.location.href = 'login.html';
+    }
+
+    // Завантажуємо дані користувача після завантаження сторінки
     fetch(`${API_BASE}/api/user/${userId}`)
       .then(res => res.json())
       .then(data => {
+        // Заповнюємо поля форми даними користувача
         document.getElementById('first_name').value = data.first_name;
         document.getElementById('last_name').value = data.last_name;
-        document.getElementById('phone_number').value = data.phone;
-      });
+        document.getElementById('phone').value = data.phone;
+      })
+      .catch(error => console.log("Error loading user data:", error));
 
+    // Завантажуємо історію бронювань
     fetch(`${API_BASE}/api/reservations/user/${userId}`)
       .then(res => res.json())
       .then(data => {
@@ -92,8 +101,10 @@
           li.textContent = `${r.room_type}, ${r.check_in_date} - ${r.check_out_date} [${r.status}]`;
           list.appendChild(li);
         });
-      });
+      })
+      .catch(error => console.log("Error loading reservations:", error));
 
+    // Зберігаємо зміни користувача
     document.getElementById('user-form').addEventListener('submit', e => {
       e.preventDefault();
       fetch(`${API_BASE}/api/user/${userId}`, {
@@ -106,14 +117,20 @@
         })
       })
       .then(res => res.json())
-      .then(data => alert(data.message));
+      .then(data => {
+        alert(data.message);
+        // Можна додати додаткові дії після збереження, наприклад, оновити дані на сторінці
+      })
+      .catch(error => console.log("Error saving user data:", error));
     });
 
+    // Управління меню послуг
     document.getElementById('services-toggle').addEventListener('click', () => {
       const menu = document.getElementById('services-menu');
       menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
     });
 
+    // Підрахунок суми замовлення послуг
     document.querySelectorAll('input[type=checkbox]').forEach(box => {
       box.addEventListener('change', () => {
         let total = 0;
@@ -124,10 +141,12 @@
       });
     });
 
+    // Оформлення замовлення
     document.getElementById('submit-order').addEventListener('click', () => {
       document.getElementById('order-status').textContent = 'Очікуйте на підтвердження замовлення...';
     });
   });
 </script>
+
 </body>
 </html>
