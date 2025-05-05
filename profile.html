@@ -80,32 +80,10 @@
   </main>
 
 <script>
- const API_BASE = 'https://backend-production-a854.up.railway.app';
+const API_BASE = 'https://backend-production-a854.up.railway.app';
+const userEmail = localStorage.getItem('userEmail');
 
-// Отримання email користувача з localStorage
-let userEmail = localStorage.getItem('userEmail');
-
-// Якщо email немає в localStorage, редірект на сторінку входу
-if (!userEmail) {
-  window.location.href = 'login.html';
-}
-
-// Завантаження даних користувача
-fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`)
-  .then(res => res.json())
-  .then(data => {
-    if (!data || !data.first_name) {
-      console.error("❌ Дані користувача не знайдено!");
-      return;
-    }
-
-    document.getElementById('first-name').textContent = data.first_name;
-    document.getElementById('last-name').textContent = data.last_name;
-    document.getElementById('phone-number').textContent = data.phone_number;
-  })
-  .catch(error => console.error("❌ Помилка завантаження даних:", error));
-
-// Функція перемикання на режим редагування
+// Перехід у режим редагування
 function enableEdit() {
   document.getElementById('user-info').style.display = 'none';
   document.getElementById('user-form').style.display = 'block';
@@ -116,59 +94,108 @@ function enableEdit() {
   document.getElementById('phone').value = document.getElementById('phone-number').textContent;
 }
 
-// Обробка збереження форми
-document.getElementById('user-form').addEventListener('submit', e => {
-  e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+  if (!userEmail) {
+    window.location.href = 'login.html';
+    return;
+  }
 
-  const updatedData = {
-    email: userEmail,
-    first_name: document.getElementById('first_name').value,
-    last_name: document.getElementById('last_name').value,
-    phone_number: document.getElementById('phone').value
-  };
+  // Завантаження особистих даних користувача
+  fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('first-name').textContent = data.first_name;
+      document.getElementById('last-name').textContent = data.last_name;
+      document.getElementById('phone-number').textContent = data.phone_number;
+    })
+    .catch(err => console.error("❌ Помилка завантаження даних користувача:", err));
 
-  fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(updatedData)
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert(data.message || 'Зміни збережено!');
+  // Завантаження історії бронювань
+  fetch(`${API_BASE}/api/reservations/email/${encodeURIComponent(userEmail)}`)
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('reservations-list');
+      if (!list) {
+        console.error("❌ Елемент 'reservations-list' не знайдено!");
+        return;
+      }
 
-    // Оновлення відображених даних
-    document.getElementById('first-name').textContent = updatedData.first_name;
-    document.getElementById('last-name').textContent = updatedData.last_name;
-    document.getElementById('phone-number').textContent = updatedData.phone_number;
+      list.innerHTML = ''; // Очищення списку
+      if (!Array.isArray(data) || data.length === 0) {
+        list.innerHTML = '<li>Немає бронювань</li>';
+        return;
+      }
 
-    // Перемикання назад
-    document.getElementById('user-form').style.display = 'none';
-    document.getElementById('user-info').style.display = 'block';
-  })
-  .catch(error => console.error("❌ Помилка збереження даних:", error));
-});
-
-    // Оформлення замовлення
-   document.getElementById('services-toggle').addEventListener('click', () => {
-      const menu = document.getElementById('services-menu');
-      menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-    });
-
-    document.querySelectorAll('input[type=checkbox]').forEach(box => {
-      box.addEventListener('change', () => {
-        let total = 0;
-        document.querySelectorAll('input[type=checkbox]:checked').forEach(c => {
-          total += parseInt(c.dataset.price);
-        });
-        document.getElementById('total').textContent = total;
+      data.forEach(r => {
+        const li = document.createElement('li');
+        const checkIn = new Date(r.check_in_date).toLocaleDateString('uk-UA');
+        const checkOut = new Date(r.check_out_date).toLocaleDateString('uk-UA');
+        li.textContent = `${r.room_type}, ${checkIn} - ${checkOut} [${r.status}]`;
+        list.appendChild(li);
       });
-    });
+    })
+    .catch(err => console.error("❌ Помилка завантаження бронювань:", err));
 
-    document.getElementById('submit-order').addEventListener('click', () => {
-      document.getElementById('order-status').textContent = 'Очікуйте на підтвердження замовлення...';
-      
+  // Обробка збереження змін у формі
+  document.getElementById('user-form').addEventListener('submit', e => {
+    e.preventDefault();
+
+    const updatedData = {
+      email: userEmail,
+      first_name: document.getElementById('first_name').value,
+      last_name: document.getElementById('last_name').value,
+      phone_number: document.getElementById('phone').value
+    };
+
+    fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message || 'Зміни збережено!');
+        // Оновлення відображених даних
+        document.getElementById('first-name').textContent = updatedData.first_name;
+        document.getElementById('last-name').textContent = updatedData.last_name;
+        document.getElementById('phone-number').textContent = updatedData.phone_number;
+
+        // Повернення до перегляду
+        document.getElementById('user-form').style.display = 'none';
+        document.getElementById('user-info').style.display = 'block';
+      })
+      .catch(err => console.error("❌ Помилка збереження даних:", err));
+  });
+
+  // Перемикач меню послуг
+  const servicesToggle = document.getElementById('services-toggle');
+  const servicesMenu = document.getElementById('services-menu');
+  if (servicesToggle && servicesMenu) {
+    servicesToggle.addEventListener('click', () => {
+      servicesMenu.style.display = (servicesMenu.style.display === 'none' ? 'block' : 'none');
+    });
+  }
+
+  // Оновлення загальної вартості замовлення
+  document.querySelectorAll('input[type=checkbox]').forEach(box => {
+    box.addEventListener('change', () => {
+      let total = 0;
+      document.querySelectorAll('input[type=checkbox]:checked').forEach(c => {
+        total += parseInt(c.dataset.price || '0');
+      });
+      document.getElementById('total').textContent = total;
     });
   });
+
+  // Обробка оформлення замовлення
+  const submitOrder = document.getElementById('submit-order');
+  if (submitOrder) {
+    submitOrder.addEventListener('click', () => {
+      document.getElementById('order-status').textContent = 'Очікуйте на підтвердження замовлення...';
+    });
+  }
+});
 </script>
+
 </body>
 </html> 
