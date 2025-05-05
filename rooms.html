@@ -192,6 +192,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const checkIn = document.getElementById("check_in_date");
+  const checkOut = document.getElementById("check_out_date");
+  const form = document.getElementById("booking-form");
+
+  const today = new Date().toISOString().split("T")[0];
+
+  // Встановлюємо мінімальні дати
+  checkIn.min = today;
+  checkOut.min = today;
+
+  form.addEventListener("submit", function (e) {
+    const inDate = checkIn.value;
+    const outDate = checkOut.value;
+
+    if (inDate < today) {
+      alert("Дата заїзду не може бути в минулому.");
+      e.preventDefault();
+    } else if (outDate <= inDate) {
+      alert("Дата виїзду повинна бути пізніше дати заїзду.");
+      e.preventDefault();
+    }
+  });
+});
+</script>
 
 </body>
 </html>
