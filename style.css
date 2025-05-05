@@ -336,7 +336,7 @@ main {
 }
 
 /* Особистий кабінет */
-.account-container {
+.profile-container {
     max-width: 1000px;
     margin: 40px auto;
     background-color: #ffffff;
@@ -345,7 +345,7 @@ main {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.account-container h2 {
+.profile-container h2 {
     font-size: 2em;
     color: #388E3C;
     margin-bottom: 20px;
@@ -353,7 +353,7 @@ main {
     padding-bottom: 10px;
 }
 
-.account-section {
+.profile-section {
     margin-bottom: 40px;
 }
 
