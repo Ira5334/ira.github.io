@@ -348,16 +348,19 @@ main {
 
 .profile-container h2 {
   color: #388E3C;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   text-align: center;
-  font-size: 2em;
+}
+
+.profile-container section {
+  margin-bottom: 30px;
 }
 
 .profile-container input,
 .profile-container textarea {
   width: 100%;
   padding: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border: 2px solid #a5d6a7;
   border-radius: 8px;
   font-size: 1em;
@@ -369,9 +372,9 @@ main {
   border: none;
   background-color: #4CAF50;
   color: white;
-  padding: 14px 20px;
+  padding: 12px 20px;
   border-radius: 0px;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -381,6 +384,21 @@ main {
 .profile-container button:hover {
   background-color: #388E3C;
 }
+
+.profile-container ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.profile-container details {
+  margin-bottom: 15px;
+}
+
+.profile-container summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
 
 /* Форма замовлення послуги */
 .order-form {
