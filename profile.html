@@ -130,13 +130,13 @@ document.getElementById('phone-number').textContent = data.phone_number;
       .catch(error => console.log("Error saving user data:", error));
     });
 
-    // Управління меню послуг
-    document.getElementById('services-toggle').addEventListener('click', () => {
+
+    // Оформлення замовлення
+   document.getElementById('services-toggle').addEventListener('click', () => {
       const menu = document.getElementById('services-menu');
       menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
     });
 
-    // Підрахунок суми замовлення послуг
     document.querySelectorAll('input[type=checkbox]').forEach(box => {
       box.addEventListener('change', () => {
         let total = 0;
@@ -147,18 +147,11 @@ document.getElementById('phone-number').textContent = data.phone_number;
       });
     });
 
-    // Оформлення замовлення
-  
-// Функції редагування
- function enableEdit() {
-  document.getElementById('user-form').style.display = 'block';
-  document.getElementById('user-info').style.display = 'none';
-
-  document.getElementById('first_name').value = document.getElementById('first-name').textContent;
-  document.getElementById('last_name').value = document.getElementById('last-name').textContent;
-  document.getElementById('phone').value = document.getElementById('phone-number').textContent;
-}
+    document.getElementById('submit-order').addEventListener('click', () => {
+      document.getElementById('order-status').textContent = 'Очікуйте на підтвердження замовлення...';
+      
+    });
+  });
 </script>
-
 </body>
-</html>
+</html> 
