@@ -98,7 +98,7 @@ document.getElementById('phone-number').textContent = data.phone_number;
       .catch(error => console.log("Error loading user data:", error));
 
     // Завантаження історії бронювань
-   fetch(`${API_BASE}/api/reservations/user/${userEmail}`)
+   fetch(`${API_BASE}/api/reservations/${userEmail}`)
       .then(res => res.json())
       .then(data => {
         const list = document.getElementById('reservations-list');
@@ -208,12 +208,6 @@ document.getElementById('phone-number').textContent = data.phone_number;
       alert('Не вдалося зберегти зміни');
     });
   }
-</script>
-
-</body>
-</html>
-    });
-  });
 </script>
 
 </body>
