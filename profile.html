@@ -30,12 +30,12 @@
   <button onclick="enableEdit()">Редагувати</button>
 </div>
 
-<div id="edit-form" style="display:none;">
-  <label>Ім'я: <input type="text" id="edit-first-name" /></label><br />
-  <label>Прізвище: <input type="text" id="edit-last-name" /></label><br />
-  <label>Телефон: <input type="text" id="edit-phone-number" /></label><br />
-  <button onclick="submitChanges()">Змінити</button>
-</div>
+<form id="user-form" style="display:none;">
+  <label>Ім'я: <input type="text" id="first_name" name="first_name" /></label><br />
+  <label>Прізвище: <input type="text" id="last_name" name="last_name" /></label><br />
+  <label>Телефон: <input type="text" id="phone" name="phone" /></label><br />
+  <button type="submit">Змінити</button>
+</form>
   </section>
 
   <section class="history">
@@ -178,36 +178,14 @@ document.getElementById('phone-number').textContent = data.phone_number;
     });
 });
 // Функції редагування
-  function enableEdit() {
-    document.getElementById('edit-form').style.display = 'block';
-    document.getElementById('user-info').style.display = 'none';
+ function enableEdit() {
+  document.getElementById('user-form').style.display = 'block';
+  document.getElementById('user-info').style.display = 'none';
 
-    document.getElementById('edit-first-name').value = document.getElementById('first-name').textContent;
-    document.getElementById('edit-last-name').value = document.getElementById('last-name').textContent;
-    document.getElementById('edit-phone-number').value = document.getElementById('phone-number').textContent;
-  }
-
-  function submitChanges() {
-    fetch(`${API_BASE}/api/user/email/${encodeURIComponent(userEmail)}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: userEmail,
-        first_name: document.getElementById('edit-first-name').value,
-        last_name: document.getElementById('edit-last-name').value,
-        phone_number: document.getElementById('edit-phone-number').value
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      alert(data.message || 'Зміни збережено!');
-      location.reload();
-    })
-    .catch(error => {
-      console.log("Помилка під час збереження:", error);
-      alert('Не вдалося зберегти зміни');
-    });
-  }
+  document.getElementById('first_name').value = document.getElementById('first-name').textContent;
+  document.getElementById('last_name').value = document.getElementById('last-name').textContent;
+  document.getElementById('phone').value = document.getElementById('phone-number').textContent;
+}
 </script>
 
 </body>
