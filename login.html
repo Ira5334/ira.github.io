@@ -58,7 +58,7 @@
       })
       .then(data => {
         localStorage.setItem('userId', data.id); // Зберігаємо ID користувача
-        window.location.href = 'user_dashboard.html'; // Перехід в кабінет
+        window.location.href = 'profile.html'; // Перехід в кабінет
       })
       .catch(err => {
         document.getElementById('error-message').textContent = err.message;
