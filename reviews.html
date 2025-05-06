@@ -48,15 +48,15 @@
   <div class="review-container">
   <h2>Залишити відгук</h2>
   <hr>
-  <form class="review-form">
-    <div class="review-row">
-      <input type="text" placeholder="Ваше ім’я" required>
-      <input type="email" placeholder="Ваш Email" required>
-    </div>
-    <input type="text" placeholder="Заголовок відгуку" required>
-    <textarea rows="5" placeholder="Напишіть свій відгук тут..." required></textarea>
-    <button type="submit">Надіслати</button>
-  </form>
+ <form class="review-form" id="feedbackForm">
+  <div class="review-row">
+    <input type="text" id="name" placeholder="Ваше ім’я" required>
+    <input type="email" id="email" placeholder="Ваш Email" required>
+  </div>
+  <input type="text" id="reviewTitle" placeholder="Заголовок відгуку" required>
+  <textarea rows="5" id="reviewText" placeholder="Напишіть свій відгук тут..." required></textarea>
+  <button type="submit">Надіслати</button>
+</form>
       <p id="successMessage" style="display:none; color: green;">Ваш відгук успішно записаний.</p>
 </div>
     
