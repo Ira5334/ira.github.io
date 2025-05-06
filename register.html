@@ -24,8 +24,11 @@
   <main>
     <form id="register-form" class="register-form">
   <h2>Реєстрація</h2>
-      <label for="name">Ім'я</label>
-      <input type="text" id="name" name="name" required>
+       <label for="first_name">Ім’я</label>
+      <input type="text" id="first_name" name="first_name" required>
+
+      <label for="last_name">Прізвище</label>
+      <input type="text" id="last_name" name="last_name" required>
 
       <label for="email">Електронна пошта</label>
       <input type="email" id="email" name="email" required>
@@ -51,7 +54,8 @@
     document.getElementById('register-form').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const name = document.getElementById('name').value;
+      const first_name = document.getElementById('first_name').value;
+      const last_name = document.getElementById('last_name').value;
       const email = document.getElementById('email').value;
       const phone = document.getElementById('phone').value;
       const password = document.getElementById('password').value;
@@ -59,7 +63,7 @@
       fetch(`${API_BASE}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone_number, password })
+        body: JSON.stringify({ first_name, last_name, email, phone_number, password })
       })
       .then(res => {
         if (!res.ok) throw new Error("Помилка під час реєстрації. Можливо, email вже використовується.");
