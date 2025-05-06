@@ -69,42 +69,43 @@
 </footer>
 
 <script>
-  document.getElementById("feedbackForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const reviewText = document.getElementById("reviewText").value;
-    const successMessage = document.getElementById("successMessage");
+      const email = document.getElementById("email").value;
+      const reviewText = document.getElementById("reviewText").value;
+      const successMessage = document.getElementById("successMessage");
 
-    fetch("https://backend-production-a854.up.railway.app/api/review", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, review: reviewText }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          successMessage.style.display = "block";
-          successMessage.style.color = "green";
-          successMessage.textContent = data.message;
-          document.getElementById("feedbackForm").reset(); // Очистити форму
-        } else {
+      fetch("https://backend-production-a854.up.railway.app/api/review", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, review: reviewText }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            successMessage.style.display = "block";
+            successMessage.style.color = "green";
+            successMessage.textContent = data.message;
+            document.getElementById("feedbackForm").reset();
+          } else {
+            successMessage.style.display = "block";
+            successMessage.style.color = "red";
+            successMessage.textContent = data.message;
+          }
+        })
+        .catch((err) => {
+          console.error("Помилка запиту:", err);
           successMessage.style.display = "block";
           successMessage.style.color = "red";
-          successMessage.textContent = data.message;
-        }
-      })
-      .catch((err) => {
-        console.error("Помилка запиту:", err);
-        successMessage.style.display = "block";
-        successMessage.style.color = "red";
-        successMessage.textContent = "Помилка під час надсилання відгуку.";
-      });
+          successMessage.textContent = "Помилка під час надсилання відгуку.";
+        });
+    });
   });
 </script>
 
- 
 </body>
 </html>
