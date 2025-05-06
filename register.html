@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Реєстрація</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Реєстрація</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Головна</a></li>
+        <li><a href="rooms.html">Номери і ціни</a></li>
+        <li><a href="services.html">Послуги</a></li>
+        <li><a href="promotions.html">Акції та події</a></li>
+        <li><a href="contact.html">Контакти</a></li>
+        <li><a href="login.html">Вхід</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <form id="register-form">
+      <label for="name">Ім'я</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Електронна пошта</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">Телефон</label>
+      <input type="tel" id="phone" name="phone" required pattern="^\+?\d{10,15}$" placeholder="+380123456789">
+
+      <label for="password">Пароль</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit">Зареєструватися</button>
+    </form>
+    <p id="register-error-message" style="color: red;"></p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Готель. Всі права захищені.</p>
+  </footer>
+
+  <script>
+    const API_BASE = 'https://backend-production-a854.up.railway.app';
+
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+
+      fetch(`${API_BASE}/api/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, password })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("Помилка під час реєстрації. Можливо, email вже використовується.");
+        return res.json();
+      })
+      .then(data => {
+        localStorage.setItem('userEmail', data.userEmail);
+        window.location.href = 'profile.html';
+      })
+      .catch(err => {
+        document.getElementById('register-error-message').textContent = err.message;
+      });
+    });
+  </script>
+</body>
+</html>
