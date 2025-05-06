@@ -441,6 +441,63 @@ main {
     background-color: #388E3C;
 }
 
+.register-form {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff; 
+  border-radius: 0px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box; 
+}
+
+.register-form h2 {
+  color: #388E3C;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 2em;
+}
+
+.register-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #a5d6a7;
+  border-radius: 8px;
+  font-size: 1em;
+  background: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.register-form button {
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 0px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.register-form button:hover {
+  background-color: #388E3C;
+}
+
+.register-form p {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+}
 
 .modal {
     display: none;
