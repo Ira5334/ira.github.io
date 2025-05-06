@@ -23,16 +23,18 @@
   </header>
 
   <main>
-    <form id="login-form">
-      <label for="email">Електронна пошта</label>
-      <input type="email" id="email" name="email" required>
+   <form class="login-form">
+  <h2>Вхід</h2>
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" required>
 
-      <label for="password">Пароль</label>
-      <input type="password" id="password" name="password" required>
+  <label for="password">Пароль</label>
+  <input type="password" id="password" name="password" required>
 
-      <button type="submit">Увійти</button>
-    </form>
-    <p id="error-message" style="color: red;"></p>
+  <button type="submit">Увійти</button>
+
+  <p id="login-error" style="display:none;">Невірний email або пароль</p>
+</form>
     <p>Ще не маєте акаунта? <a href="register.html">Зареєструватися</a></p>
   </main>
 
