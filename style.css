@@ -138,29 +138,31 @@ main {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
+    padding: 30px 40px;
+    width: 95%;
+    margin: 20px auto;
+    box-sizing: border-box;
 }
 
-.service {
+.service,
+.service-text {
     background-color: #ffffff;
     padding: 20px;
     border: 2px solid #388E3C;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 0;
     text-align: left;
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* Модифікація рамки для service-text (можеш залишити, якщо хочеш інший колір) */
 .service-text {
-    background-color: #ffffff;
-    padding: 20px;
     border: 2px solid #a5d6a7;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 0;
-    text-align: left;
-    display: inline-block;
-    width: 100%;
     margin-bottom: 20px;
 }
+
 
 /* Акції */
 #promotions {
@@ -202,9 +204,9 @@ main {
 /* Форма відгуку */
 .review-container {
   background-color: #f0fdf4;
-  padding: 30px;
-  max-width: 1000px;
-  margin: 0 auto;
+  padding: 30px 40px;
+  width: 95%;              
+  margin: 20px auto;        
   border-radius: 0px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', sans-serif;
