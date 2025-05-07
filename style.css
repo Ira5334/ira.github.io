@@ -40,23 +40,21 @@ body {
 
 /* Шапка */
 header {
-    background: linear-gradient(135deg, #4CAF50, #66BB6A);
-    padding: 30px 20px;
+    background-color: #ffffff;
+    padding: 16px 0;
     text-align: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    border-bottom: none;
-    border-radius: 0 0 20px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: none;
 }
 
 header h1 {
-    color: white;
-    font-size: 2.8em;
+    color: #212121;
+    font-size: 2rem;
     margin: 0;
     font-weight: 600;
-    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-    letter-spacing: 1px;
+    letter-spacing: -0.5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 /* Меню */
 nav ul {
@@ -608,22 +606,18 @@ main {
 
 /* Футер */
 footer {
-    background: linear-gradient(135deg, #4CAF50, #66BB6A);
-    color: white;
+    background-color: #f9f9f9;
+    color: #666666;
     text-align: center;
-    padding: 30px 20px;
-    width: 100%;
-    box-shadow: 0 -6px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 20px 20px 0 0;
-    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    padding: 16px 0;
+    border-top: 1px solid #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 footer p {
-    font-size: 1.1em;
+    font-size: 0.95rem;
     margin: 0;
-    letter-spacing: 0.5px;
 }
-
 
 /* Кнопки */
 button, .book-button {
