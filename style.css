@@ -133,14 +133,14 @@ main {
     background-color: #0056b3;
 }
 
-.service-container {
+.services-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
 
-.service-box {
+.services-box {
     width: 48%;
     background-color: #e6f9e6;
     padding: 20px;
@@ -150,7 +150,7 @@ main {
     text-align: center;
 }
 
-.service-text {
+.services-text {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -163,14 +163,14 @@ main {
 }
 
 /* Сторінка акцій */
-.promotion-container {
+.promotions-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
 
-.promotion-box {
+.promotions-box {
     width: 48%;
     background-color: #e6f9e6;
     padding: 20px;
@@ -180,7 +180,7 @@ main {
     text-align: center;
 }
 
-.promotion-text {
+.promotions-text {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -193,14 +193,14 @@ main {
 }
 
 /* Сторінка відгуків */
-.review-container {
+.reviews-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
 
-.review-text {
+.reviews-text {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
