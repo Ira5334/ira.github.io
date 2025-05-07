@@ -136,19 +136,18 @@ main {
 /* Послуги */
 .service-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     gap: 20px;
+    padding: 20px;
 }
 
 .service {
-    width: 48%;
     background-color: #ffffff;
     padding: 20px;
     border: 2px solid #388E3C;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 0;
-    text-align: center;
+    text-align: left;
 }
 
 .service-text {
