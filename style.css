@@ -40,7 +40,7 @@ body {
 
 /* Шапка */
 header {
-    background-color: #e6f4e9; /* світло-зелений фон */
+    background-color: #7ddb91; /* світло-зелений фон */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -619,15 +619,20 @@ main {
 
 /* Футер */
 footer {
-    background-color: rgba(76, 175, 80, 0.9);
-    color: white;
+    background-color: #7ddb91; /* світло-зелений фон */
+    color: #1b4d28; /* темно-зелений текст */
     text-align: center;
-    padding: 20px;
-    width: 100%;
+    padding: 20px 40px;
+    margin: 40px 20px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0, 100, 0, 0.1); /* м'яка зелена тінь */
+    font-family: 'Segoe UI', sans-serif;
 }
 
 footer p {
     font-size: 1em;
+    margin: 0;
+    font-weight: 500;
 }
 
 /* Кнопки */
