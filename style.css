@@ -171,7 +171,6 @@ main {
     box-sizing: border-box;
 }
 
-/* Модифікація рамки для service-text (можеш залишити, якщо хочеш інший колір) */
 .service-text {
     border: 2px solid #a5d6a7;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -222,7 +221,7 @@ main {
   padding: 30px 40px;
   width: 95%;              
   margin: 20px auto;        
-  border-radius: 0px;
+  border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   font-family: 'Segoe UI', sans-serif;
 }
@@ -263,7 +262,7 @@ main {
   padding: 15px;
   font-size: 16px;
   border: 2px solid #a5d6a7;
-  border-radius: 0px;
+  border-radius: 5px;
   background-color: #ffffff;
   width: 100%;
   box-sizing: border-box;
@@ -280,7 +279,7 @@ main {
   font-size: 16px;
   font-weight: bold;
   border: none;
-  border-radius: 0px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background 0.3s ease;
   width: fit-content;
@@ -327,7 +326,7 @@ main {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    border-radius: 0px;
+    border-radius: 10px;
     font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
@@ -434,7 +433,7 @@ main {
     color: white;
     padding: 14px 20px;
     border: none;
-    border-radius: 0px;
+    border-radius: 10px;
     font-size: 1.2em;
     font-weight: bold;
     cursor: pointer;
@@ -485,7 +484,7 @@ main {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
-  border-radius: 0px;
+  border-radius: 10px;
   font-size: 1.2em;
   font-weight: bold;
   cursor: pointer;
@@ -543,7 +542,7 @@ main {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
-  border-radius: 0px;
+  border-radius: 10px;
   font-size: 1.2em;
   font-weight: bold;
   cursor: pointer;
@@ -641,7 +640,7 @@ button, .book-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
-    border-radius: 0px;
+    border-radius: 10px;
     font-size: 1.1em;
     font-weight: 500;
     transition: background-color 0.3s ease;
